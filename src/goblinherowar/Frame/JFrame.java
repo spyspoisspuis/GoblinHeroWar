@@ -3,8 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package goblinherowar.Frame;
 
+package goblinherowar.Frame;
 /**
  *
  * @author spyspoisspui
@@ -16,6 +16,7 @@ public class JFrame extends javax.swing.JFrame {
      */
     public JFrame() {
         initComponents();
+        
     }
 
     /**
