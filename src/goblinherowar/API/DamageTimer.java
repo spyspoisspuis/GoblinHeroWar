@@ -18,9 +18,12 @@ public class DamageTimer {
             public void run(){
                 while(runningTimer && cnt<=(hp/damageRecieve)){
                     cnt += 1;
-                    hp -= damageRecieve;
+                    if(hp-damageRecieve >= 0)
+                        hp -= damageRecieve;
+                    else hp = 0;
                     bar.setValue(hp);
                 }
+                t.cancel();
             }
         };
     }
