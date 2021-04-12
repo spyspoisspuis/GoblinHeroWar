@@ -52,6 +52,8 @@ public class Scene1 extends javax.swing.JPanel {
         s1Key3 = new javax.swing.JButton();
         s1Key2 = new javax.swing.JButton();
         s1Key1 = new javax.swing.JButton();
+        jProgressBar1 = new javax.swing.JProgressBar();
+        jProgressBar2 = new javax.swing.JProgressBar();
         s1HP = new javax.swing.JLabel();
         s1Setting = new javax.swing.JButton();
         Scene1BG = new javax.swing.JLabel();
@@ -64,17 +66,24 @@ public class Scene1 extends javax.swing.JPanel {
 
         s1Key2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/key2.png"))); // NOI18N
         add(s1Key2);
-        s1Key2.setBounds(250, 140, 59, 140);
+        s1Key2.setBounds(250, 140, 128, 140);
 
         s1Key1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/key1.png"))); // NOI18N
-        s1Key1.setBounds(new java.awt.Rectangle(400, 190, 140, 55));
         s1Key1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 s1Key1MouseClicked(evt);
             }
         });
         add(s1Key1);
-        s1Key1.setBounds(400, 190, 140, 55);
+        s1Key1.setBounds(400, 190, 140, 49);
+
+        jProgressBar1.setBackground(new java.awt.Color(255, 0, 51));
+        add(jProgressBar1);
+        jProgressBar1.setBounds(680, 500, 130, 20);
+
+        jProgressBar2.setBackground(new java.awt.Color(255, 0, 0));
+        add(jProgressBar2);
+        jProgressBar2.setBounds(140, 500, 130, 20);
 
         s1HP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/hp.png"))); // NOI18N
         add(s1HP);
@@ -88,7 +97,7 @@ public class Scene1 extends javax.swing.JPanel {
             }
         });
         add(s1Setting);
-        s1Setting.setBounds(880, 10, 67, 70);
+        s1Setting.setBounds(880, 10, 57, 70);
 
         Scene1BG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/Scene1.jpg"))); // NOI18N
         Scene1BG.setSize(new java.awt.Dimension(960, 540));
@@ -109,6 +118,8 @@ public class Scene1 extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Scene1BG;
+    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JProgressBar jProgressBar2;
     private javax.swing.JLabel s1HP;
     private javax.swing.JButton s1Key1;
     private javax.swing.JButton s1Key2;
