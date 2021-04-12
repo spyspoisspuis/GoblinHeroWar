@@ -5,11 +5,15 @@
  */
 
 package goblinherowar.Frame;
+
+import java.util.ArrayList;
+import javax.swing.JPanel;
+
 /**
  *
  * @author spyspoisspui
  */
-public class JFrame extends javax.swing.JFrame {
+public class JFrame extends javax.swing.JFrame{
 
     /**
      * Creates new form JFrame
@@ -17,6 +21,9 @@ public class JFrame extends javax.swing.JFrame {
     public JFrame() {
         initComponents();
         
+    }
+    public JFrame(String name){
+        super(name);
     }
 
     /**
@@ -29,25 +36,26 @@ public class JFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        setBounds(new java.awt.Rectangle(0, 0, 400, 600));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
+        getContentPane().setLayout(null);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+        ArrayList<JPanel> scene = new ArrayList<>();
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -70,11 +78,42 @@ public class JFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(JFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JFrame().setVisible(true);
+                //new JFrame().setVisible(true);
+                Home home = new Home();
+                Scene1 s1 = new Scene1();
+                Scene2 s2 = new Scene2();
+                Scene3 s3 = new Scene3();
+                Scene4 s4 = new Scene4();
+                Scene5 s5 = new Scene5();
+                Scene6 s6 = new Scene6();
+                Scene7 s7 = new Scene7();
+                Scene8 s8 = new Scene8();
+                Scene9 s9 = new Scene9();
+                Scene10 s10 = new Scene10();
+                Pause pause = new Pause();
+                Result result = new Result();
+                
+                scene.add(home);    scene.add(s1);  scene.add(s2);  scene.add(s3);
+                scene.add(s4);      scene.add(s5);  scene.add(s6);  scene.add(s7);
+                scene.add(s8);      scene.add(s9);  scene.add(s10);
+                scene.add(pause);   scene.add(result);
+                
+                JFrame j = new JFrame("Hero wars");
+                j.setSize(960, 540);
+                j.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                j.setVisible(true);
+                j.add(scene.get(0));
+                
+                
+                
+                /*
+                for(int i=1;i<scene.size();i++){
+                    j.add(scene.get(i));
+                }
+                */
             }
         });
     }
