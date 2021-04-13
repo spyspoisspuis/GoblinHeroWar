@@ -1,9 +1,8 @@
 package goblinherowar.API;
 import java.util.Random;
-import java.util.ArrayList;
 public class SceneManager {
-    
-    public static int randomScene(){
+    public static int currentIdx;
+    public static void randomScene(){
         Random rand = new Random();
         int randInt=1;
         int cntSc = GameManager.cntScene;
@@ -15,6 +14,8 @@ public class SceneManager {
             randInt = rand.nextInt(2)+8;
         else if (cntSc == 5)
             randInt = 10;
-        return randInt;
+        
+        currentIdx = randInt;
+        MainFrame.openScene(randInt);
     }
 }

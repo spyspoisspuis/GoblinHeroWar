@@ -1,15 +1,15 @@
 package goblinherowar.API;
 import javax.swing.JProgressBar;
-import java.util.*;
 public class GameManager {
     public static int cntScene = 0;
-    public static int heroHP = 100;
+    public static int heroHP = 100; 
     public static int goblinHP = 100;
     private static int damageMultiplier;
-    private static DamageTimer[] dmtArr = new DamageTimer[2]; // o for hero 1 for goblin
+    private static DamageTimer[] dmtArr = new DamageTimer[2]; // 0 for hero 1 for goblin
+    
     public static void playerDamaged(String objName,JProgressBar heroBar){
         //need to get Array
-        String correctName = ""; //getImagetouchHeroArray()[cntScene];
+        String correctName = ""; //getImagetouchHeroArray()[SceneManager.currentIdx];
         if (!objName.equals(correctName)) return ;
         damageMultiplier = (int)setCalculateSceneCnt();
         DamageTimer dmt = new DamageTimer(heroHP,heroBar,15*damageMultiplier);
@@ -18,9 +18,8 @@ public class GameManager {
     }
     public static void goblinDamaged(String objName,JProgressBar goblinBar){
         //need to get Array
-        String correctName = ""; //getImagetouchGoblinArray()[cntScene];
+        String correctName = ""; //getImagetouchGoblinArray()[SceneManager.currentIdx];
         if (!objName.equals(correctName)) return ;
-        
         damageMultiplier = (int)setCalculateSceneCnt();
         DamageTimer dmt = new DamageTimer(goblinHP,goblinBar,15*damageMultiplier);
         dmtArr[1] = dmt;
@@ -30,7 +29,6 @@ public class GameManager {
         // getArray
         String heroCorrectName = "";
         String goblinCorrectName = "";
-        
         if(objName.equals(heroCorrectName)) 
             stopHeroDamaged();
         else if (objName.equals(goblinCorrectName))
