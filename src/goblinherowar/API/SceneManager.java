@@ -1,5 +1,6 @@
 package goblinherowar.API;
 import java.util.Random;
+import goblinherowar.Frame.MainFrame;
 public class SceneManager {
     public static int currentIdx;
     public static void randomScene(){
@@ -16,6 +17,6 @@ public class SceneManager {
             randInt = 10;
         
         currentIdx = randInt;
-        MainFrame.openScene(randInt);
+        MainFrame.openScene(randInt,0);
     }
 }
