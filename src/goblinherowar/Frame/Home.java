@@ -10,17 +10,17 @@ package goblinherowar.Frame;
  * @author peeravich.c
  */
 public class Home extends javax.swing.JPanel{
-
     /**
      * Creates new form Home
      */
     public Home() {
         initComponents();
+        
         homeStart.setOpaque(false);
         homeStart.setContentAreaFilled(false);
         homeStart.setBorderPainted(false);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,7 +35,7 @@ public class Home extends javax.swing.JPanel{
 
         setLayout(null);
 
-        homeStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/home_start.png"))); // NOI18N
+        homeStart.setIcon(new javax.swing.ImageIcon("/Users/peeravich.c/Desktop/Prog Tech/Project/GoblinHeroWar/src/goblinherowar/Frame/Component/home_start.png")); // NOI18N
         homeStart.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 homeStartMouseClicked(evt);
@@ -56,8 +56,7 @@ public class Home extends javax.swing.JPanel{
 
     private void homeStartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeStartMouseClicked
         Home.super.setVisible(false);
-        new JFrame().add(new Scene1());
-        new Scene1().setVisible(true);
+        MainFrame.openScene(1);
     }//GEN-LAST:event_homeStartMouseClicked
 
 
