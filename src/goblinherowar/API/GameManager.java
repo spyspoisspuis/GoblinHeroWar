@@ -7,25 +7,19 @@ public class GameManager {
     private static int damageMultiplier;
     private static DamageTimer[] dmtArr = new DamageTimer[2]; // 0 for hero 1 for goblin
     
-    public static void playerDamaged(String objName,JProgressBar heroBar){
-        //need to get Array
-        String correctName = ""; //getImagetouchHeroArray()[SceneManager.currentIdx];
-        if (!objName.equals(correctName)) return ;
+    public static void playerDamaged(JProgressBar heroBar){
         damageMultiplier = (int)setCalculateSceneCnt();
         DamageTimer dmt = new DamageTimer(heroHP,heroBar,15*damageMultiplier);
         dmtArr[0] = dmt;
         dmt.runTimer();
     }
-    public static void goblinDamaged(String objName,JProgressBar goblinBar){
-        //need to get Array
-        String correctName = ""; //getImagetouchGoblinArray()[SceneManager.currentIdx];
-        if (!objName.equals(correctName)) return ;
+    public static void goblinDamaged(JProgressBar goblinBar){
         damageMultiplier = (int)setCalculateSceneCnt();
         DamageTimer dmt = new DamageTimer(goblinHP,goblinBar,15*damageMultiplier);
         dmtArr[1] = dmt;
         dmt.runTimer();
     }
-    public void detectedStopDamage(String objName){
+    /*public void detectedStopDamage(String objName){
         // getArray
         String heroCorrectName = "";
         String goblinCorrectName = "";
@@ -35,11 +29,11 @@ public class GameManager {
             stopGoblinDamage();
         else 
             return;
-    }
-    private void stopHeroDamaged(){
+    }*/
+    public static void stopHeroDamaged(){
         dmtArr[0].stopTimer();
     }
-    private void stopGoblinDamage(){
+    public static void stopGoblinDamage(){
         dmtArr[1].stopTimer();
     }
     
