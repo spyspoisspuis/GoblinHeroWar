@@ -25,14 +25,13 @@ public class Scene1 extends Scene implements GetDetectName{
     
     private Timer t;
     private int timeCounter;
-
-    // <editor-fold defaultstate="collapsed" desc="Scene1()">    
+   
     public Scene1() {
         initComponents();
         
         resetScene();
     } 
-//</editor-fold>
+
     
     // <editor-fold defaultstate="collapsed" desc="Scene Method">
     public String getPlayerDetectName(){
