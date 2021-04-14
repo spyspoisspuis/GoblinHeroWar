@@ -5,11 +5,15 @@
  */
 package goblinherowar.Frame;
 
+import goblinherowar.API.SceneManager;
+import java.util.ArrayList;
+import javax.swing.JButton;
+
 /**
  *
  * @author peeravich.c
  */
-public class Home extends javax.swing.JPanel{
+public class Home extends Scene{
     /**
      * Creates new form Home
      */
@@ -19,6 +23,12 @@ public class Home extends javax.swing.JPanel{
         homeStart.setOpaque(false);
         homeStart.setContentAreaFilled(false);
         homeStart.setBorderPainted(false);
+    }
+    
+    public ArrayList<JButton> getButton(){
+        ArrayList<JButton> j = new ArrayList<>();
+        j.add(homeStart);
+        return j;
     }
     
     /**
@@ -33,12 +43,13 @@ public class Home extends javax.swing.JPanel{
         homeStart = new javax.swing.JButton();
         HomeBG = new javax.swing.JLabel();
 
+        setSize(new java.awt.Dimension(960, 540));
         setLayout(null);
 
         homeStart.setIcon(new javax.swing.ImageIcon("/Users/peeravich.c/Desktop/Prog Tech/Project/GoblinHeroWar/src/goblinherowar/Frame/Component/home_start.png")); // NOI18N
-        homeStart.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                homeStartMouseClicked(evt);
+        homeStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                homeStartActionPerformed(evt);
             }
         });
         add(homeStart);
@@ -54,10 +65,15 @@ public class Home extends javax.swing.JPanel{
         HomeBG.setBounds(0, 0, 960, 540);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void homeStartMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_homeStartMouseClicked
-        Home.super.setVisible(false);
-        MainFrame.openScene(1);
-    }//GEN-LAST:event_homeStartMouseClicked
+    private void homeStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeStartActionPerformed
+        // TODO add your handling code here:
+        MainFrame.setSceneVisible(0, false);
+        MainFrame.addScene(1,0);     //SceneManager.randomScene()
+        MainFrame.setSceneVisible(1, true);    //SceneManager.randomScene()
+        MainFrame.setKeyButtonEnabled(true);
+        MainFrame.setTransparent(1);    //SceneManager.randomScene()
+        
+    }//GEN-LAST:event_homeStartActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

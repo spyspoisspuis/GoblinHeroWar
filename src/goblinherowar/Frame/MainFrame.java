@@ -6,51 +6,21 @@
 
 package goblinherowar.Frame;
 
+import goblinherowar.API.SceneManager;
 import java.util.ArrayList;
-import javax.swing.JPanel;
+import javax.swing.JButton;
 
 /**
  *
  * @author spyspoisspui
  */
 public class MainFrame extends javax.swing.JFrame{
-   
-    
-    private static String[] heroDetect;
-    private static String[] goblinDetect;
-    
-    public void initArray(){
-        
-        /*
-        heroDetect[1]=s1.getPlayerDetectName();
-        heroDetect[2]=s2.getPlayerDetectName();
-        heroDetect[3]=s3.getPlayerDetectName();
-        heroDetect[4]=s4.getPlayerDetectName();
-        heroDetect[5]=s5.getPlayerDetectName();
-        heroDetect[6]=s6.getPlayerDetectName();
-        heroDetect[7]=s7.getPlayerDetectName();
-        heroDetect[8]=s8.getPlayerDetectName();
-        heroDetect[9]=s9.getPlayerDetectName();
-        heroDetect[10]=s10.getPlayerDetectName();
-        */
-        
-        
-        /*
-        goblinDetect[1]=s1.getEnemyDetectName();
-        goblinDetect[2]=s2.getEnemyDetectName();
-        goblinDetect[3]=s3.getEnemyDetectName();
-        goblinDetect[4]=s4.getEnemyDetectName();
-        goblinDetect[5]=s5.getEnemyDetectName();
-        goblinDetect[6]=s6.getEnemyDetectName();
-        goblinDetect[7]=s7.getEnemyDetectName();
-        goblinDetect[8]=s8.getEnemyDetectName();
-        goblinDetect[9]=s9.getEnemyDetectName();
-        goblinDetect[10]=s10.getEnemyDetectName();
-        */
-    
-    }
+    private static MainFrame j = new MainFrame("Hero wars");
+    private static ArrayList<Scene> scene = new ArrayList<>();
+    private static String[] heroDetect = new String[20];
+    private static String[] goblinDetect = new String[20];
+    private static ArrayList<ArrayList<JButton>> buttonScene = new ArrayList<>();
 
-    
     /**
      * Creates new form JFrame
      */
@@ -63,9 +33,12 @@ public class MainFrame extends javax.swing.JFrame{
         initComponents();
     }
     
-    
-    public static void openScene(int index){
-        //j.add(scene[index]);
+    // <editor-fold defaultstate="collapsed" desc="MainFrame Method">
+    public static void addScene(int index){
+        j.add(scene.get(index));
+    }
+    public static void addScene(int index,int position){
+        j.add(scene.get(index), position);
     }
     
     public static String[] getHeroDetect(){
@@ -75,7 +48,39 @@ public class MainFrame extends javax.swing.JFrame{
     public static String[] getEnemyDetect(){
         return goblinDetect;
     }
+
+    public static ArrayList<ArrayList<JButton>> getButtonScene(){
+        return buttonScene;
+    }
     
+    public static void setKeyButtonEnabled(boolean set){
+        for(int i=0;i<buttonScene.get(1).size();i++){     //buttonScene.get(SceneManager.currentIdx).size()
+            buttonScene.get(1).get(i).setEnabled(set);      //buttonScene.get(SceneManager.currentIdx).get(i)
+        }
+    }
+    
+    public static void setSceneVisible(int s,boolean set){
+        scene.get(s).setVisible(set);
+    }
+    
+    public static void midResetScene(){
+        int s=1;    //TEST
+        switch(s){      //SceneManager.currentIdx
+            case 1:
+                scene.get(1).resetScene();
+            default:    break;
+        }
+    }
+    
+    public static void setTransparent(int s){
+        System.out.println("setTrans:"+buttonScene.get(1).size());
+        for(int i=0;i<buttonScene.get(1).size();i++){     //buttonScene.get(SceneManager.currentIdx).size())
+            buttonScene.get(1).get(i).setOpaque(false);
+            buttonScene.get(1).get(i).setContentAreaFilled(false);     //buttonScene.get(SceneManager.currentIdx).get(i)
+            buttonScene.get(1).get(i).setBorderPainted(false);
+        }
+    }
+ //</editor-fold>  
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -130,23 +135,7 @@ public class MainFrame extends javax.swing.JFrame{
         //</editor-fold>
         /* Create and display the form */
         
-        ArrayList<JPanel> scene = new ArrayList<>();
-        MainFrame j = new MainFrame("Hero wars");
-        java.awt.EventQueue.invokeLater(new Runnable(){
-            public void run(){
-                Home home = new Home();
-                scene.add(home);
-                j.setSize(960, 540);
-                j.setDefaultCloseOperation(MainFrame.EXIT_ON_CLOSE);
-                j.setEnabled(true);
-                j.setVisible(true);
-                j.add(scene.get(0));
-            }
-        });
-        
-        
-        
-        /*
+        // <editor-fold defaultstate="collapsed" desc="Create Scene object">
         Home home = new Home();
         Scene1 s1 = new Scene1();
         Scene2 s2 = new Scene2();
@@ -160,17 +149,73 @@ public class MainFrame extends javax.swing.JFrame{
         Scene10 s10 = new Scene10();
         Pause pause = new Pause();
         Result result = new Result();
-        */
+        //</editor-fold>
         
+        // <editor-fold defaultstate="collapsed" desc="Add to variable">
+        scene.add(home);
+        scene.add(s1);
+        scene.add(s2);
+        scene.add(s3);
+        scene.add(s4);
+        scene.add(s5);
+        scene.add(s6);
+        scene.add(s7);
+        scene.add(s8);
+        scene.add(s9);
+        scene.add(s10);
+        scene.add(pause);
+        scene.add(result);
+        scene.add(pause);
+        
+        
+        heroDetect[1]=s1.getPlayerDetectName();
         /*
-        scene[0]=home;  scene[1]=s1;    scene[2]=s2;    scene[3]=s3;
-        scene[4]=s4;    scene[5]=s5;    scene[6]=s6;    scene[7]=s7;
-        scene[8]=s8;    scene[9]=s9;    scene[10]=s10;
-        scene[11]=pause;    scene[12]=result;
+        heroDetect[2]=s2.getPlayerDetectName();
+        heroDetect[3]=s3.getPlayerDetectName();
+        heroDetect[4]=s4.getPlayerDetectName();
+        heroDetect[5]=s5.getPlayerDetectName();
+        heroDetect[6]=s6.getPlayerDetectName();
+        heroDetect[7]=s7.getPlayerDetectName();
+        heroDetect[8]=s8.getPlayerDetectName();
+        heroDetect[9]=s9.getPlayerDetectName();
+        heroDetect[10]=s10.getPlayerDetectName();
         */
         
+        goblinDetect[1]=s1.getEnemyDetectName();
+        /*
+        goblinDetect[2]=s2.getEnemyDetectName();
+        goblinDetect[3]=s3.getEnemyDetectName();
+        goblinDetect[4]=s4.getEnemyDetectName();
+        goblinDetect[5]=s5.getEnemyDetectName();
+        goblinDetect[6]=s6.getEnemyDetectName();
+        goblinDetect[7]=s7.getEnemyDetectName();
+        goblinDetect[8]=s8.getEnemyDetectName();
+        goblinDetect[9]=s9.getEnemyDetectName();
+        goblinDetect[10]=s10.getEnemyDetectName();
+        */
         
-        System.out.print("TEST");     //////
+        buttonScene.add(home.getButton());
+        buttonScene.add(s1.getButton());
+        /*
+        buttonScene.add(2, s2.getButton());
+        buttonScene.add(3, s3.getButton());
+        buttonScene.add(4, s4.getButton());
+        buttonScene.add(5, s5.getButton());
+        buttonScene.add(6, s6.getButton());
+        buttonScene.add(7, s7.getButton());
+        buttonScene.add(8, s8.getButton());
+        buttonScene.add(9, s9.getButton());
+        buttonScene.add(10, s10.getButton());
+        */
+        //</editor-fold>
+        
+        j.setSize(960, 540);
+        j.setDefaultCloseOperation(MainFrame.EXIT_ON_CLOSE);
+        j.setVisible(true);
+        j.add(scene.get(0));
+        
+        pause.setVisible(true);
+        pause.setVisible(false);
         
     }
 
