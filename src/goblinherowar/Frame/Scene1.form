@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
-  <Properties>
-    <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-      <Dimension value="[960, 540]"/>
-    </Property>
-  </Properties>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
@@ -26,14 +21,9 @@
     <Component class="javax.swing.JButton" name="s1Key3">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/goblinherowar/Frame/Component/key3.png"/>
+          <Image iconType="3" name="/goblinherowar/Frame/Component/scene1Component/s1Key3.png"/>
         </Property>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="s1Key1"/>
-        </Property>
-      </AccessibilityProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="s1Key3ActionPerformed"/>
       </Events>
@@ -46,14 +36,9 @@
     <Component class="javax.swing.JButton" name="s1Key2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/goblinherowar/Frame/Component/key2.png"/>
+          <Image iconType="3" name="/goblinherowar/Frame/Component/scene1Component/s1Key2.png"/>
         </Property>
       </Properties>
-      <AccessibilityProperties>
-        <Property name="AccessibleContext.accessibleParent" type="javax.accessibility.Accessible" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="s1Key1"/>
-        </Property>
-      </AccessibilityProperties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="s1Key2ActionPerformed"/>
       </Events>
@@ -66,7 +51,7 @@
     <Component class="javax.swing.JButton" name="s1Key1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/goblinherowar/Frame/Component/key1.png"/>
+          <Image iconType="3" name="/goblinherowar/Frame/Component/scene1Component/s1Key1.png"/>
         </Property>
       </Properties>
       <Events>
@@ -81,7 +66,7 @@
     <Component class="javax.swing.JLabel" name="s1_EnemyDetect">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/goblinherowar/Frame/Component/s1_enemy.png"/>
+          <Image iconType="3" name="/goblinherowar/Frame/Component/scene1Component/s1_enemy.png"/>
         </Property>
       </Properties>
       <AccessibilityProperties>
@@ -98,7 +83,7 @@
     <Component class="javax.swing.JLabel" name="s1_PlayerDetect">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/goblinherowar/Frame/Component/s1_player.jpg"/>
+          <Image iconType="3" name="/goblinherowar/Frame/Component/scene1Component/s1_player.jpg"/>
         </Property>
       </Properties>
       <AccessibilityProperties>
@@ -115,7 +100,7 @@
     <Component class="javax.swing.JLabel" name="s1_bottom4">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/goblinherowar/Frame/Component/s1_bottom4.jpg"/>
+          <Image iconType="3" name="/goblinherowar/Frame/Component/scene1Component/s1_bottom4.jpg"/>
         </Property>
       </Properties>
       <AccessibilityProperties>
@@ -132,7 +117,7 @@
     <Component class="javax.swing.JLabel" name="s1_bottom3">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/goblinherowar/Frame/Component/s1_bottom3.jpg"/>
+          <Image iconType="3" name="/goblinherowar/Frame/Component/scene1Component/s1_bottom3.jpg"/>
         </Property>
       </Properties>
       <AccessibilityProperties>
@@ -149,7 +134,7 @@
     <Component class="javax.swing.JLabel" name="s1_bottom2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/goblinherowar/Frame/Component/s1_bottom2.jpg"/>
+          <Image iconType="3" name="/goblinherowar/Frame/Component/scene1Component/s1_bottom2.jpg"/>
         </Property>
       </Properties>
       <AccessibilityProperties>
@@ -166,7 +151,7 @@
     <Component class="javax.swing.JLabel" name="s1_bottom1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/goblinherowar/Frame/Component/s1_bottom1.jpg"/>
+          <Image iconType="3" name="/goblinherowar/Frame/Component/scene1Component/s1_bottom1.jpg"/>
         </Property>
       </Properties>
       <AccessibilityProperties>
@@ -183,7 +168,7 @@
     <Component class="javax.swing.JLabel" name="s1_mid">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/goblinherowar/Frame/Component/s1_mid.jpg"/>
+          <Image iconType="3" name="/goblinherowar/Frame/Component/scene1Component/s1_mid.jpg"/>
         </Property>
       </Properties>
       <Constraints>
@@ -195,7 +180,7 @@
     <Component class="javax.swing.JLabel" name="s1_top4">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/goblinherowar/Frame/Component/s1_top4.jpg"/>
+          <Image iconType="3" name="/goblinherowar/Frame/Component/scene1Component/s1_top4.jpg"/>
         </Property>
       </Properties>
       <Constraints>
@@ -207,7 +192,7 @@
     <Component class="javax.swing.JLabel" name="s1_top3">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/goblinherowar/Frame/Component/s1_top3.jpg"/>
+          <Image iconType="3" name="/goblinherowar/Frame/Component/scene1Component/s1_top3.jpg"/>
         </Property>
       </Properties>
       <Constraints>
@@ -219,7 +204,7 @@
     <Component class="javax.swing.JLabel" name="s1_top2">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/goblinherowar/Frame/Component/s1_top2.jpg"/>
+          <Image iconType="3" name="/goblinherowar/Frame/Component/scene1Component/s1_top2.jpg"/>
         </Property>
       </Properties>
       <Constraints>
@@ -231,7 +216,7 @@
     <Component class="javax.swing.JLabel" name="s1_top1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/goblinherowar/Frame/Component/s1_top1.jpg"/>
+          <Image iconType="3" name="/goblinherowar/Frame/Component/scene1Component/s1_top1.jpg"/>
         </Property>
       </Properties>
       <Constraints>
@@ -240,7 +225,7 @@
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JProgressBar" name="jProgressBar1">
+    <Component class="javax.swing.JProgressBar" name="s1PlayerHPBar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="0" red="ff" type="rgb"/>
@@ -248,26 +233,29 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="680" y="500" width="130" height="20"/>
+          <AbsoluteConstraints x="680" y="500" width="130" height="22"/>
         </Constraint>
       </Constraints>
     </Component>
-    <Component class="javax.swing.JProgressBar" name="jProgressBar2">
+    <Component class="javax.swing.JProgressBar" name="s1EnemyHPBar">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="0" green="0" red="ff" type="rgb"/>
         </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="null"/>
+        </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="140" y="500" width="130" height="20"/>
+          <AbsoluteConstraints x="140" y="500" width="130" height="22"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="s1HP">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/goblinherowar/Frame/Component/hp.png"/>
+          <Image iconType="3" name="/goblinherowar/Frame/Component/scene1Component/s1HP.png"/>
         </Property>
       </Properties>
       <Constraints>
@@ -282,7 +270,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/goblinherowar/Frame/Component/setting.png"/>
+          <Image iconType="3" name="/goblinherowar/Frame/Component/pauseSceneComponent/Setting.png"/>
         </Property>
       </Properties>
       <Events>
@@ -297,7 +285,7 @@
     <Component class="javax.swing.JLabel" name="Scene1BG">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/goblinherowar/Frame/Component/Scene1.jpg"/>
+          <Image iconType="3" name="/goblinherowar/Frame/Component/scene1Component/Scene1.jpg"/>
         </Property>
         <Property name="size" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[960, 540]"/>

@@ -17,6 +17,6 @@ public class SceneManager {
             randInt = 10;
         
         currentIdx = randInt;
-        MainFrame.openScene(randInt,0);
+        //MainFrame.addScene(randInt,0);
     }
 }

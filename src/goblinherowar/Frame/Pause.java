@@ -5,6 +5,7 @@
  */
 package goblinherowar.Frame;
 
+import goblinherowar.API.GameManager;
 import goblinherowar.API.SceneManager;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -60,10 +61,9 @@ public class Pause extends Scene {
         pause = new javax.swing.JLabel();
         greybg = new javax.swing.JLabel();
 
-        setSize(new java.awt.Dimension(960, 540));
         setLayout(null);
 
-        exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/exit.png"))); // NOI18N
+        exit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/pauseSceneComponent/exit.png"))); // NOI18N
         exit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitActionPerformed(evt);
@@ -72,7 +72,7 @@ public class Pause extends Scene {
         add(exit);
         exit.setBounds(560, 240, 140, 140);
 
-        resume.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/resume.png"))); // NOI18N
+        resume.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/pauseSceneComponent/resume.png"))); // NOI18N
         resume.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 resumeActionPerformed(evt);
@@ -81,7 +81,7 @@ public class Pause extends Scene {
         add(resume);
         resume.setBounds(410, 320, 140, 140);
 
-        retry.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/retry.png"))); // NOI18N
+        retry.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/pauseSceneComponent/retry.png"))); // NOI18N
         retry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 retryActionPerformed(evt);
@@ -90,12 +90,11 @@ public class Pause extends Scene {
         add(retry);
         retry.setBounds(250, 240, 140, 140);
 
-        pause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/pause.png"))); // NOI18N
+        pause.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/pauseSceneComponent/pause.png"))); // NOI18N
         add(pause);
         pause.setBounds(150, 20, 670, 500);
 
-        greybg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/transparentgrey.png"))); // NOI18N
-        greybg.setSize(new java.awt.Dimension(960, 540));
+        greybg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/pauseSceneComponent/transparentgrey.png"))); // NOI18N
         add(greybg);
         greybg.setBounds(0, 0, 960, 540);
     }// </editor-fold>//GEN-END:initComponents
@@ -110,6 +109,7 @@ public class Pause extends Scene {
     private void resumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resumeActionPerformed
         // TODO add your handling code here:
         //############################ DetectedStopDamage
+        GameManager.resumeGame();
         MainFrame.setSceneVisible(11,false);
         MainFrame.setKeyButtonEnabled(true);
         MainFrame.addScene(1,0);         //SceneManager.currentIdx

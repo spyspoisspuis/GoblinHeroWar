@@ -43,19 +43,19 @@ public class Home extends Scene{
         homeStart = new javax.swing.JButton();
         HomeBG = new javax.swing.JLabel();
 
-        setSize(new java.awt.Dimension(960, 540));
         setLayout(null);
 
-        homeStart.setIcon(new javax.swing.ImageIcon("/Users/peeravich.c/Desktop/Prog Tech/Project/GoblinHeroWar/src/goblinherowar/Frame/Component/home_start.png")); // NOI18N
+        homeStart.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/homeComponent/home_start.png"))); // NOI18N
         homeStart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 homeStartActionPerformed(evt);
             }
         });
         add(homeStart);
-        homeStart.setBounds(350, 440, 260, 65);
+        homeStart.setBounds(350, 440, 260, 59);
 
-        HomeBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/Home.jpg"))); // NOI18N
+        HomeBG.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/homeComponent/Home.jpg"))); // NOI18N
+        HomeBG.setLabelFor(HomeBG);
         HomeBG.setText("jLabel1");
         HomeBG.setMaximumSize(new java.awt.Dimension(960, 540));
         HomeBG.setMinimumSize(new java.awt.Dimension(960, 540));

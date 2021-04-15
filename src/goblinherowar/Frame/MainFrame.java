@@ -73,7 +73,6 @@ public class MainFrame extends javax.swing.JFrame{
     }
     
     public static void setTransparent(int s){
-        System.out.println("setTrans:"+buttonScene.get(1).size());
         for(int i=0;i<buttonScene.get(1).size();i++){     //buttonScene.get(SceneManager.currentIdx).size())
             buttonScene.get(1).get(i).setOpaque(false);
             buttonScene.get(1).get(i).setContentAreaFilled(false);     //buttonScene.get(SceneManager.currentIdx).get(i)
@@ -168,7 +167,7 @@ public class MainFrame extends javax.swing.JFrame{
         scene.add(pause);
         
         
-        heroDetect[1]=s1.getPlayerDetectName();
+       // heroDetect[1]=s1.getPlayerDetectName();
         /*
         heroDetect[2]=s2.getPlayerDetectName();
         heroDetect[3]=s3.getPlayerDetectName();
@@ -209,7 +208,7 @@ public class MainFrame extends javax.swing.JFrame{
         */
         //</editor-fold>
         
-        j.setSize(960, 540);
+        j.setSize(960, 560);
         j.setDefaultCloseOperation(MainFrame.EXIT_ON_CLOSE);
         j.setVisible(true);
         j.add(scene.get(0));

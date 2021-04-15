@@ -12,6 +12,9 @@ import javax.swing.JPanel;
  * @author peeravich.c
  */
 public class Scene extends JPanel{
+    public Scene(){
+        this.setSize(960, 560);
+    }
     public void resetScene(){
         
     }
