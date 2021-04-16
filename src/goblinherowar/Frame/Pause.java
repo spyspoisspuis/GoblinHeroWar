@@ -108,7 +108,6 @@ public class Pause extends Scene {
 
     private void resumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resumeActionPerformed
         // TODO add your handling code here:
-        //############################ DetectedStopDamage
         GameManager.resumeGame();
         MainFrame.setSceneVisible(11,false);
         MainFrame.setKeyButtonEnabled(true);

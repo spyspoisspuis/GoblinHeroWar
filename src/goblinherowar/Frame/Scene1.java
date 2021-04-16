@@ -67,6 +67,9 @@ public class Scene1 extends Scene implements GetDetectName{
         s1Key1.setEnabled(true);
         s1Key2.setEnabled(true);
         s1Key3.setEnabled(true);
+        s1Key1.setVisible(true);
+        s1Key2.setVisible(true);
+        s1Key3.setVisible(true);
         s1Key1.setLocation(400, 190);
         s1Key2.setLocation(250, 140);
         s1Key3.setLocation(700, 230);
@@ -308,14 +311,16 @@ public class Scene1 extends Scene implements GetDetectName{
         else Util.moveButton(s1Key2, 250, 140);
         
         if(!key1Open && !s1_bottom4.isVisible()) return;
-        if(s1Key2.isEnabled()) return;
+        if(!s1Key2.isEnabled()) return;
         if(s1_bottom4.isVisible()){
             s1_mid.setVisible(false);  
             if(key2cnt%2==1){
+                Util.moveButton(s1Key2, 250, 90);
                 s1_EnemyDetect.setVisible(true);
                 GameManager.goblinDamaged();
             }
             else{
+                Util.moveButton(s1Key2, 250, 140);
                 s1_EnemyDetect.setVisible(false);
                 GameManager.stopGoblinDamage();
             }
@@ -326,7 +331,7 @@ public class Scene1 extends Scene implements GetDetectName{
     // <editor-fold defaultstate="collapsed" desc="Key3 Clicked">    
     private void s1Key3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s1Key3ActionPerformed
         // TODO add your handling code here:
-               key3cnt++;
+        key3cnt++;
         key3Open = !key3Open;
         if(key3cnt%2 == 1) Util.moveButton(s1Key3, 780, 230);
         else Util.moveButton(s1Key3, 700, 230);

@@ -1,4 +1,5 @@
 package goblinherowar.API;
+import goblinherowar.Frame.MainFrame;
 import javax.swing.JProgressBar;
 public class GameManager {
     public static int cntScene = 0;
@@ -9,6 +10,8 @@ public class GameManager {
     private static boolean heroDetect = false;
     private static boolean goblinDetect = false;
     private static boolean pause = false;
+    
+    public static String result;
     
     private static JProgressBar heroBar,goblinBar;
     public static void setPlayerBar(JProgressBar bar) { heroBar = bar; }
@@ -66,12 +69,19 @@ public class GameManager {
     public static void endGame(String name){
         //need to end this game;
         pauseGame();
-        if(name=="Hero") System.out.println("Goblin Win");
-        
-        else if (name == "Goblin") System.out.println("Player Win"+calculateScore()); 
-        
-        
+        if("Hero".equals(name)){
+            System.out.println("Goblin Win");
+            MainFrame.endLoseScene();
+        }
+        else if ("Goblin".equals(name)){
+            System.out.println("Player Win"+calculateScore());
+            if("1 Star".equals(calculateScore()))  result = "1 Star";
+            else if("2 Stars".equals(calculateScore())) result = "2 Stars";
+            else if("3 Stars".equals(calculateScore())) result = "3 Stars";
+            MainFrame.endWinScene();
+        }
     }
+    
     private static String calculateScore(){
         int hpLeft = heroBar.getValue();
         if(hpLeft <= 40) return "1 Star";

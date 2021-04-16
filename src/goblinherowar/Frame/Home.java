@@ -72,7 +72,6 @@ public class Home extends Scene{
         MainFrame.setSceneVisible(1, true);    //SceneManager.randomScene()
         MainFrame.setKeyButtonEnabled(true);
         MainFrame.setTransparent(1);    //SceneManager.randomScene()
-        
     }//GEN-LAST:event_homeStartActionPerformed
 
 

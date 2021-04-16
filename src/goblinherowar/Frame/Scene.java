@@ -15,7 +15,14 @@ public class Scene extends JPanel{
     public Scene(){
         this.setSize(960, 560);
     }
+    
     public void resetScene(){
+        
+    }
+    public void getWinScene(String r){
+        
+    }
+    public void getLoseScene(){
         
     }
 }

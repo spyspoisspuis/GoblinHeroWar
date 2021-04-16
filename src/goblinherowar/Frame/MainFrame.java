@@ -6,6 +6,7 @@
 
 package goblinherowar.Frame;
 
+import goblinherowar.API.GameManager;
 import goblinherowar.API.SceneManager;
 import java.util.ArrayList;
 import javax.swing.JButton;
@@ -59,6 +60,12 @@ public class MainFrame extends javax.swing.JFrame{
         }
     }
     
+    public static void setKeyButtonVisible(boolean set){
+        for(int i=0;i<buttonScene.get(1).size();i++){     //buttonScene.get(SceneManager.currentIdx).size()
+            buttonScene.get(1).get(i).setVisible(set);      //buttonScene.get(SceneManager.currentIdx).get(i)
+        }
+    }
+    
     public static void setSceneVisible(int s,boolean set){
         scene.get(s).setVisible(set);
     }
@@ -68,8 +75,25 @@ public class MainFrame extends javax.swing.JFrame{
         switch(s){      //SceneManager.currentIdx
             case 1:
                 scene.get(1).resetScene();
+            case 2:
+                
             default:    break;
         }
+    }
+    
+    public static void endWinScene(){
+        addScene(12, 0);
+        setSceneVisible(12, true);
+        setKeyButtonEnabled(false);
+        setKeyButtonVisible(false);
+        scene.get(12).getWinScene(GameManager.result);
+    }
+    public static void endLoseScene(){
+        addScene(12, 0);
+        setSceneVisible(12, true);
+        setKeyButtonEnabled(false);
+        setKeyButtonVisible(false);
+        scene.get(12).getLoseScene();
     }
     
     public static void setTransparent(int s){
@@ -164,7 +188,6 @@ public class MainFrame extends javax.swing.JFrame{
         scene.add(s10);
         scene.add(pause);
         scene.add(result);
-        scene.add(pause);
         
         
        // heroDetect[1]=s1.getPlayerDetectName();
@@ -196,15 +219,15 @@ public class MainFrame extends javax.swing.JFrame{
         buttonScene.add(home.getButton());
         buttonScene.add(s1.getButton());
         /*
-        buttonScene.add(2, s2.getButton());
-        buttonScene.add(3, s3.getButton());
-        buttonScene.add(4, s4.getButton());
-        buttonScene.add(5, s5.getButton());
-        buttonScene.add(6, s6.getButton());
-        buttonScene.add(7, s7.getButton());
-        buttonScene.add(8, s8.getButton());
-        buttonScene.add(9, s9.getButton());
-        buttonScene.add(10, s10.getButton());
+        buttonScene.add(s2.getButton());
+        buttonScene.add(s3.getButton());
+        buttonScene.add(s4.getButton());
+        buttonScene.add(s5.getButton());
+        buttonScene.add(s6.getButton());
+        buttonScene.add(s7.getButton());
+        buttonScene.add(s8.getButton());
+        buttonScene.add(s9.getButton());
+        buttonScene.add(s10.getButton());
         */
         //</editor-fold>
         
@@ -215,9 +238,12 @@ public class MainFrame extends javax.swing.JFrame{
         
         pause.setVisible(true);
         pause.setVisible(false);
+        result.setVisible(true);
+        result.setVisible(false);
         
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
-}
+
