@@ -5,7 +5,7 @@ import javax.swing.JButton;
 
 
 public interface GetDetectName {
-    String getPlayerDetectName();
-    String getEnemyDetectName();
+    //String getPlayerDetectName();
+    //String getEnemyDetectName();
     ArrayList<JButton> getButton();
 }

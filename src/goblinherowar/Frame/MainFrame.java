@@ -76,7 +76,18 @@ public class MainFrame extends javax.swing.JFrame{
             case 1:
                 scene.get(1).resetScene();
             case 2:
-                
+                scene.get(2).resetScene();
+            case 3:
+                scene.get(3).resetScene();
+            case 4:
+                scene.get(4).resetScene();
+            case 5:
+                scene.get(5).resetScene();
+            case 6:
+                scene.get(6).resetScene();
+            case 7:
+                scene.get(7).resetScene();
+            
             default:    break;
         }
     }

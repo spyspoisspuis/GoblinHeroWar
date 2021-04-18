@@ -236,7 +236,6 @@ public class Scene1 extends Scene implements GetDetectName{
     // <editor-fold defaultstate="collapsed" desc="Setting Clicked">
     private void s1SettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s1SettingActionPerformed
         // TODO add your handling code here:
-        //############################ DetectedStopDamage
         GameManager.pauseGame();
         MainFrame.addScene(11,0);
         MainFrame.setSceneVisible(11,true);

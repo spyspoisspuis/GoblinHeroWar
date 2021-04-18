@@ -5,18 +5,87 @@
  */
 package goblinherowar.Frame;
 
+import goblinherowar.API.GameManager;
+import java.util.ArrayList;
+import javax.swing.JButton;
+
 /**
  *
  * @author peeravich.c
  */
-public class Scene4 extends Scene {
+public class Scene4 extends Scene implements GetDetectName{
 
     /**
      * Creates new form Scene4
      */
     public Scene4() {
         initComponents();
+        
+        resetScene();
+        //GameManager.setGoblinBar(s1EnemyHPBar);
+        //GameManager.setPlayerBar(s1PlayerHPBar);
     }
+    
+    // <editor-fold defaultstate="collapsed" desc="Scene Method">
+    public String getPlayerDetectName(){
+        return playerDetect.getName();
+    }
+    
+    public String getEnemyDetectName(){
+        return enemyDetect.getName();
+    }
+    
+    public ArrayList<JButton> getButton(){
+        ArrayList<JButton> b = new ArrayList<>();
+        b.add(key1);
+        b.add(key2);
+        b.add(key3);
+        b.add(key4);
+        return b;
+    }
+    
+    public void resetScene(){
+        setting.setOpaque(false);
+        setting.setContentAreaFilled(false);
+        setting.setBorderPainted(false);
+        
+        key1.setEnabled(true);
+        key2.setEnabled(true);
+        key3.setEnabled(true);
+        key4.setEnabled(true);
+        key1.setVisible(true);
+        key2.setVisible(true);
+        key3.setVisible(true);
+        key4.setVisible(true);
+        /*
+        key1.setLocation(,);
+        key2.setLocation(,);
+        key3.setLocation(,);
+        key4.setLocation(,);
+        */
+        top1.setVisible(true);
+        top2.setVisible(true);
+        top3.setVisible(true);
+        mid1.setVisible(false);
+        mid2.setVisible(false);
+        mid3.setVisible(false);
+        bottom1_L.setVisible(false);
+        bottom2_L.setVisible(false);
+        bottom1_R.setVisible(false);
+        bottom2_R.setVisible(false);
+        enemyDetect.setVisible(false);
+        playerDetect.setVisible(false);
+        /*
+        key1cnt = key2cnt = key3cnt = 0;
+        key1Open = key2Open = key3Open = false;
+        
+        enemyHPBar.setForeground(Color.red);
+        enemyHPBar.setValue(GameManager.goblinHP);
+        playerHPBar.setForeground(Color.red);
+        playerHPBar.setValue(GameManager.heroHP);
+        */
+    }
+//</editor-fold>
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,19 +96,136 @@ public class Scene4 extends Scene {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        key1 = new javax.swing.JButton();
+        key2 = new javax.swing.JButton();
+        key3 = new javax.swing.JButton();
+        key4 = new javax.swing.JButton();
+        top1 = new javax.swing.JLabel();
+        top2 = new javax.swing.JLabel();
+        top3 = new javax.swing.JLabel();
+        mid1 = new javax.swing.JLabel();
+        mid2 = new javax.swing.JLabel();
+        mid3 = new javax.swing.JLabel();
+        bottom1_L = new javax.swing.JLabel();
+        bottom2_L = new javax.swing.JLabel();
+        bottom1_R = new javax.swing.JLabel();
+        bottom2_R = new javax.swing.JLabel();
+        playerDetect = new javax.swing.JLabel();
+        enemyDetect = new javax.swing.JLabel();
+        setting = new javax.swing.JButton();
+        Scene4 = new javax.swing.JLabel();
+
+        setLayout(null);
+
+        key1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene4Component/key1.png"))); // NOI18N
+        add(key1);
+        key1.setBounds(400, 80, 140, 60);
+
+        key2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene4Component/key2.png"))); // NOI18N
+        add(key2);
+        key2.setBounds(350, 250, 140, 60);
+
+        key3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene4Component/key3.png"))); // NOI18N
+        add(key3);
+        key3.setBounds(240, 200, 70, 140);
+
+        key4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene4Component/key4.png"))); // NOI18N
+        add(key4);
+        key4.setBounds(670, 170, 70, 140);
+
+        top1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene4Component/top1.png"))); // NOI18N
+        add(top1);
+        top1.setBounds(300, 20, 380, 80);
+
+        top2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene4Component/top2.png"))); // NOI18N
+        add(top2);
+        top2.setBounds(300, 40, 380, 60);
+
+        top3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene4Component/top3.png"))); // NOI18N
+        add(top3);
+        top3.setBounds(300, 70, 380, 40);
+
+        mid1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene4Component/mid1.png"))); // NOI18N
+        add(mid1);
+        mid1.setBounds(450, 100, 54, 90);
+
+        mid2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene4Component/mid2.png"))); // NOI18N
+        add(mid2);
+        mid2.setBounds(380, 150, 80, 40);
+
+        mid3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene4Component/mid3.png"))); // NOI18N
+        add(mid3);
+        mid3.setBounds(380, 180, 70, 100);
+
+        bottom1_L.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene4Component/bottom1_L.png"))); // NOI18N
+        add(bottom1_L);
+        bottom1_L.setBounds(380, 270, 70, 50);
+
+        bottom2_L.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene4Component/bottom2_L.png"))); // NOI18N
+        add(bottom2_L);
+        bottom2_L.setBounds(280, 270, 110, 60);
+
+        bottom1_R.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene4Component/bottom1_R.png"))); // NOI18N
+        add(bottom1_R);
+        bottom1_R.setBounds(440, 240, 140, 50);
+
+        bottom2_R.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene4Component/bottom2_R.png"))); // NOI18N
+        add(bottom2_R);
+        bottom2_R.setBounds(570, 240, 140, 50);
+
+        playerDetect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene4Component/fail.png"))); // NOI18N
+        add(playerDetect);
+        playerDetect.setBounds(710, 240, 60, 100);
+
+        enemyDetect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene4Component/win.png"))); // NOI18N
+        add(enemyDetect);
+        enemyDetect.setBounds(210, 280, 60, 80);
+
+        setting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene4Component/setting.png"))); // NOI18N
+        setting.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                settingActionPerformed(evt);
+            }
+        });
+        add(setting);
+        setting.setBounds(880, 10, 67, 70);
+
+        Scene4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene4Component/Scene4.jpg"))); // NOI18N
+        Scene4.setSize(new java.awt.Dimension(960, 540));
+        add(Scene4);
+        Scene4.setBounds(0, 0, 960, 540);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void settingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingActionPerformed
+        // TODO add your handling code here:
+        GameManager.pauseGame();
+        MainFrame.addScene(11,0);
+        MainFrame.setSceneVisible(11,true);
+        key1.setEnabled(false);
+        key2.setEnabled(false);
+        key3.setEnabled(false);
+        key4.setEnabled(false);
+    }//GEN-LAST:event_settingActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Scene4;
+    private javax.swing.JLabel bottom1_L;
+    private javax.swing.JLabel bottom1_R;
+    private javax.swing.JLabel bottom2_L;
+    private javax.swing.JLabel bottom2_R;
+    private javax.swing.JLabel enemyDetect;
+    private javax.swing.JButton key1;
+    private javax.swing.JButton key2;
+    private javax.swing.JButton key3;
+    private javax.swing.JButton key4;
+    private javax.swing.JLabel mid1;
+    private javax.swing.JLabel mid2;
+    private javax.swing.JLabel mid3;
+    private javax.swing.JLabel playerDetect;
+    private javax.swing.JButton setting;
+    private javax.swing.JLabel top1;
+    private javax.swing.JLabel top2;
+    private javax.swing.JLabel top3;
     // End of variables declaration//GEN-END:variables
 }

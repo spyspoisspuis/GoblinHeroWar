@@ -161,7 +161,9 @@ public class Result extends Scene {
         MainFrame.setSceneVisible(1, false);    //SceneManager.currentIdx
         MainFrame.midResetScene();
         //SceneManager.randomScene
+        MainFrame.addScene(2, 0);   //SceneManager.currentIdx
         MainFrame.setSceneVisible(2,true);  //SceneManager.currentIdx
+        MainFrame.setTransparent(2);    //SceneManager.currentIdx
         resetScene();
     }//GEN-LAST:event_nextActionPerformed
 
