@@ -6,14 +6,33 @@
 package goblinherowar.Frame;
 
 import goblinherowar.API.GameManager;
+import goblinherowar.API.Util;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.Timer;
 
 /**
  *
  * @author peeravich.c
  */
 public class Scene3 extends Scene implements GetDetectName{
+    // <editor-fold defaultstate="collapsed" desc="Instance variable">
+    private int key1cnt = 0;
+    private int key2cnt = 0;
+    private int key3cnt = 0;
+    private int key4cnt = 0;
+    private boolean key1Open = false;
+    private boolean key2Open = false;
+    private boolean key3Open = false;
+    private boolean key4Open = false;
+    private Timer[] t = new Timer[10];
+    private int[] timeCounter = new int[10];
+    private int idx = 0;
+    private int key1Interrupt,key2Interrupt,key3Interrupt,key4Interrupt;
+    //</editor-fold>
 
     /**
      * Creates new form Scene3
@@ -22,8 +41,8 @@ public class Scene3 extends Scene implements GetDetectName{
         initComponents();
         
         resetScene();
-        //GameManager.setGoblinBar(s1EnemyHPBar);
-        //GameManager.setPlayerBar(s1PlayerHPBar);
+        GameManager.setGoblinBar(enemyHPBar);
+        GameManager.setPlayerBar(playerHPBar);
     }
     
     // <editor-fold defaultstate="collapsed" desc="Scene Method">
@@ -57,12 +76,11 @@ public class Scene3 extends Scene implements GetDetectName{
         key2.setVisible(true);
         key3.setVisible(true);
         key4.setVisible(true);
-        /*
-        key1.setLocation(,);
-        key2.setLocation(,);
-        key3.setLocation(,);
-        key4.setLocation(,);
-        */
+        Util.moveButton(key1, key1.getX(), key1.getY());
+        Util.moveButton(key2, key2.getX(), key2.getY());
+        Util.moveButton(key3, key3.getX(), key3.getY());
+        Util.moveButton(key4, key4.getX(), key4.getY());
+        
         top1.setVisible(true);
         top2.setVisible(true);
         top3.setVisible(true);
@@ -76,15 +94,16 @@ public class Scene3 extends Scene implements GetDetectName{
         mid3_R.setVisible(false);
         enemyDetect.setVisible(false);
         playerDetect.setVisible(false);
-        /*
-        key1cnt = key2cnt = key3cnt = 0;
-        key1Open = key2Open = key3Open = false;
+        
+        key1cnt = key2cnt = key3cnt = key4cnt = 0;
+        key1Open = key2Open = key3Open = key4Open = false;
+        key1Interrupt = key2Interrupt = key3Interrupt = key4Interrupt = -1;
         
         enemyHPBar.setForeground(Color.red);
         enemyHPBar.setValue(GameManager.goblinHP);
         playerHPBar.setForeground(Color.red);
         playerHPBar.setValue(GameManager.heroHP);
-        */
+        
     }
 //</editor-fold>
 
@@ -115,25 +134,50 @@ public class Scene3 extends Scene implements GetDetectName{
         playerDetect = new javax.swing.JLabel();
         enemyDetect = new javax.swing.JLabel();
         setting = new javax.swing.JButton();
+        playerHPBar = new javax.swing.JProgressBar();
+        enemyHPBar = new javax.swing.JProgressBar();
         Scene3 = new javax.swing.JLabel();
 
         setLayout(null);
 
         key1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene3Component/key1.png"))); // NOI18N
+        key1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                key1ActionPerformed(evt);
+            }
+        });
         add(key1);
         key1.setBounds(400, 80, 138, 60);
 
         key2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene3Component/key2.png"))); // NOI18N
+        key2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                key2ActionPerformed(evt);
+            }
+        });
         add(key2);
         key2.setBounds(430, 170, 138, 60);
+        key2.getAccessibleContext().setAccessibleParent(key1);
 
         key3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene3Component/key3.png"))); // NOI18N
+        key3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                key3ActionPerformed(evt);
+            }
+        });
         add(key3);
         key3.setBounds(160, 230, 138, 60);
+        key3.getAccessibleContext().setAccessibleParent(key1);
 
         key4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene3Component/key4.png"))); // NOI18N
+        key4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                key4ActionPerformed(evt);
+            }
+        });
         add(key4);
         key4.setBounds(670, 170, 70, 140);
+        key4.getAccessibleContext().setAccessibleParent(key2);
 
         top1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene3Component/top1.png"))); // NOI18N
         add(top1);
@@ -154,38 +198,47 @@ public class Scene3 extends Scene implements GetDetectName{
         mid1_L.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene3Component/mid1_L.png"))); // NOI18N
         add(mid1_L);
         mid1_L.setBounds(350, 150, 110, 50);
+        mid1_L.getAccessibleContext().setAccessibleParent(key1);
 
         mid2_L.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene3Component/mid2_L.png"))); // NOI18N
         add(mid2_L);
         mid2_L.setBounds(230, 150, 130, 50);
+        mid2_L.getAccessibleContext().setAccessibleParent(key1);
 
         mid3_L.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene3Component/mid3_L.png"))); // NOI18N
         add(mid3_L);
         mid3_L.setBounds(230, 180, 50, 90);
+        mid3_L.getAccessibleContext().setAccessibleParent(key1);
 
         mid1_R.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene3Component/mid1_R.png"))); // NOI18N
         add(mid1_R);
         mid1_R.setBounds(460, 200, 60, 100);
+        mid1_R.getAccessibleContext().setAccessibleParent(key2);
 
         mid2_R.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene3Component/mid2_R.png"))); // NOI18N
         add(mid2_R);
         mid2_R.setBounds(510, 240, 100, 60);
+        mid2_R.getAccessibleContext().setAccessibleParent(key2);
 
         mid3_R.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene3Component/mid3_R.png"))); // NOI18N
         add(mid3_R);
         mid3_R.setBounds(600, 240, 110, 60);
+        mid3_R.getAccessibleContext().setAccessibleParent(key2);
 
         mid_M.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene3Component/mid_M.png"))); // NOI18N
         add(mid_M);
         mid_M.setBounds(460, 110, 60, 90);
+        mid_M.getAccessibleContext().setAccessibleParent(key1);
 
         playerDetect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene3Component/fail.png"))); // NOI18N
         add(playerDetect);
         playerDetect.setBounds(700, 240, 60, 100);
+        playerDetect.getAccessibleContext().setAccessibleParent(key4);
 
         enemyDetect.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene3Component/win.png"))); // NOI18N
         add(enemyDetect);
         enemyDetect.setBounds(230, 260, 60, 100);
+        enemyDetect.getAccessibleContext().setAccessibleParent(key3);
 
         setting.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene3Component/setting.png"))); // NOI18N
         setting.addActionListener(new java.awt.event.ActionListener() {
@@ -195,6 +248,10 @@ public class Scene3 extends Scene implements GetDetectName{
         });
         add(setting);
         setting.setBounds(880, 10, 67, 70);
+        add(playerHPBar);
+        playerHPBar.setBounds(670, 500, 120, 30);
+        add(enemyHPBar);
+        enemyHPBar.setBounds(170, 500, 120, 30);
 
         Scene3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene3Component/Scene3.jpg"))); // NOI18N
         Scene3.setSize(new java.awt.Dimension(960, 540));
@@ -202,6 +259,7 @@ public class Scene3 extends Scene implements GetDetectName{
         Scene3.setBounds(0, 0, 960, 540);
     }// </editor-fold>//GEN-END:initComponents
 
+    // <editor-fold defaultstate="collapsed" desc="Setting Performed">
     private void settingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingActionPerformed
         // TODO add your handling code here:
         GameManager.pauseGame();
@@ -212,11 +270,191 @@ public class Scene3 extends Scene implements GetDetectName{
         key3.setEnabled(false);
         key4.setEnabled(false);
     }//GEN-LAST:event_settingActionPerformed
+// </editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Key1 Performed">
+    private void key1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_key1ActionPerformed
+        // TODO add your handling code here:
+        if(!key1.isEnabled()) return;
+        key1Open = !key1Open;
+        key1cnt++;
+        // <editor-fold defaultstate="collapsed" desc="open key"> 
+        if(key1cnt%2==1) {
+            Util.moveButton(key1,key1.getX()-80,key1.getY());
+            recheckTimerIdx();
+            timeCounter[idx] = 0;
+            t[idx] = new Timer(1000, new ActionListener() {
+                //@override
+                public void actionPerformed(ActionEvent e) {
+                    if(timeCounter[idx]<=3) key1OpenPerformed(timeCounter[idx]);
+                    else if(timeCounter[idx] > 3){
+                        if(!key1Open) { key1Interrupt = idx;  t[idx].stop(); return; }
+                        if(key1Interrupt != -1) {  idx = key1Interrupt; key1Interrupt = -1; }
+                        
+                        if (key3Open) { enemyDetect.setVisible(true); GameManager.goblinDamaged();}
+                        t[idx].stop();
+                        timeCounter[idx] = 0;
+                    }
+                    timeCounter[idx]++;
+                }
+            });
+            t[idx].start();
+        }
+        //</editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="close key"> 
+        if(key1cnt%2 == 0){
+            Util.moveButton(key1, key1.getX()+80, key1.getY());
+            
+        }
+        //</editor-fold>
+        key1Open = !key1Open;
+    }//GEN-LAST:event_key1ActionPerformed
 
+    private void key1OpenPerformed(int timerCounter){
+        if(timerCounter == 0 && top4.isVisible()) {
+            t[idx].start();
+            top1.setVisible(false);
+            mid_M.setVisible(true);
+        }
+        if(timerCounter == 1 && mid_M.isVisible()){
+            t[idx].start();
+            top2.setVisible(false);
+            mid1_L.setVisible(true);
+            if(key2Open) { t[idx].stop(); }
+        }
+        if (timerCounter == 2 && mid_M.isVisible()){
+            t[idx].start();
+            top3.setVisible(false);
+            mid2_L.setVisible(true);
+            if(key2Open) { t[idx].stop(); }
+        }
+        if(timerCounter == 3 && mid_M.isVisible()){
+            t[idx].start();
+            top4.setVisible(false);
+            mid3_L.setVisible(true);
+            if(key3Open) { t[idx].stop(); timeCounter[idx] = 0; }
+        }
+    }
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Key2 Performed">
+    private void key2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_key2ActionPerformed
+        // TODO add your handling code here:
+        if(!key2.isEnabled()) return;
+        key2Open = !key2Open;
+        key2cnt++;
+        // <editor-fold defaultstate="collapsed" desc="open key"> 
+        if(key2cnt%2==1) {
+            Util.moveButton(key2,key2.getX()+80,key2.getY());
+            recheckTimerIdx();
+            timeCounter[idx] = 0;
+            t[idx] = new Timer(1000, new ActionListener() {
+                //@override
+                public void actionPerformed(ActionEvent e) {
+                    if(timeCounter[idx]<=2) key2OpenPerformed(timeCounter[idx]);
+                    else if(timeCounter[idx] > 2){
+                        if(!key2Open) { key2Interrupt = idx;  t[idx].stop(); return; }
+                        if(key2Interrupt != -1) {  idx = key2Interrupt; key2Interrupt = -1; }
+                        
+                        if (key4Open) { playerDetect.setVisible(true); GameManager.playerDamaged(); }
+                        t[idx].stop();
+                        timeCounter[idx] = 0;
+                    }
+                    timeCounter[idx]++;
+                }
+            });
+            t[idx].start();
+        }
+        //</editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="close key"> 
+        if(key2cnt%2 == 0){
+            Util.moveButton(key2, key2.getX()-80, key2.getY());
+            
+        }
+        //</editor-fold>
+        key2Open = !key2Open;
+    }//GEN-LAST:event_key2ActionPerformed
 
+    private void key2OpenPerformed(int timerCounter){
+        if(timerCounter == 0 && mid_M.isVisible()){
+            t[idx].start();
+            top2.setVisible(false);
+            mid1_R.setVisible(true);
+        }
+        if (timerCounter == 1 && mid_M.isVisible()){
+            t[idx].start();
+            top3.setVisible(false);
+            mid2_R.setVisible(true);
+        }
+        if(timerCounter == 2 && mid_M.isVisible()){
+            t[idx].start();
+            top4.setVisible(false);
+            mid3_R.setVisible(true);
+            if(key4Open) { t[idx].stop(); timeCounter[idx] = 0; }
+        }
+    }
+    //</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Key3 Performed">
+    private void key3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_key3ActionPerformed
+        // TODO add your handling code here:
+        if(!key3.isEnabled()) return;
+        key3Open = !key3Open;
+        key3cnt++;
+        
+        if(key3cnt%2 == 1) Util.moveButton(key3, key3.getX()-80, key3.getY());
+        else Util.moveButton(key3, key3.getX()+80, key3.getY());
+        
+        if(!key3Open && !mid3_L.isVisible()) return;
+        if(!key3.isEnabled()) return;
+        if(mid3_L.isVisible()){ 
+            if(key3cnt%2==1){
+                enemyDetect.setVisible(true);
+                GameManager.goblinDamaged();
+            }
+            else{
+                enemyDetect.setVisible(false);
+                GameManager.stopGoblinDamage();
+            }
+        }
+    }//GEN-LAST:event_key3ActionPerformed
+//</editor-fold>
+    
+    // <editor-fold defaultstate="collapsed" desc="Key4 Performed">
+    private void key4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_key4ActionPerformed
+        // TODO add your handling code here:
+        if(!key4.isEnabled()) return;
+        key4Open = !key4Open;
+        key4cnt++;
+        
+        if(key4cnt%2 == 1) Util.moveButton(key4, key4.getX(), key4.getY()-50);
+        else Util.moveButton(key4, key4.getX(), key4.getY()+50);
+        
+        if(!key4Open && !mid3_R.isVisible()) return;
+        if(!key4.isEnabled()) return;
+        if(mid3_R.isVisible()){ 
+            if(key4cnt%2==1){
+                playerDetect.setVisible(true);
+                GameManager.playerDamaged();
+            }
+            else{
+                playerDetect.setVisible(false);
+                GameManager.stopHeroDamaged();
+            }
+        }
+    }//GEN-LAST:event_key4ActionPerformed
+//</editor-fold>
+    
+    private void recheckTimerIdx(){
+        if (idx == timeCounter.length-1) idx = 0;
+        else idx+=1;
+    }
+
+    // <editor-fold defaultstate="collapsed" desc="Generate Variable">
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Scene3;
     private javax.swing.JLabel enemyDetect;
+    private javax.swing.JProgressBar enemyHPBar;
     private javax.swing.JButton key1;
     private javax.swing.JButton key2;
     private javax.swing.JButton key3;
@@ -229,6 +467,7 @@ public class Scene3 extends Scene implements GetDetectName{
     private javax.swing.JLabel mid3_R;
     private javax.swing.JLabel mid_M;
     private javax.swing.JLabel playerDetect;
+    private javax.swing.JProgressBar playerHPBar;
     private javax.swing.JButton setting;
     private javax.swing.JLabel top1;
     private javax.swing.JLabel top2;
@@ -236,3 +475,4 @@ public class Scene3 extends Scene implements GetDetectName{
     private javax.swing.JLabel top4;
     // End of variables declaration//GEN-END:variables
 }
+// </editor-fold>
