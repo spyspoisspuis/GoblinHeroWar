@@ -31,6 +31,7 @@ public class Scene1 extends Scene implements GetDetectName{
     private Timer[] t = new Timer[10];
     private int[] timeCounter = new int[10];
     private int idx = 0;
+    private int key1Interrupt,key2Interrupt,key3Interrupt;
     //</editor-fold>
    
     public Scene1() {
@@ -88,6 +89,7 @@ public class Scene1 extends Scene implements GetDetectName{
         
         key1cnt = key2cnt = key3cnt = 0;
         key1Open = key2Open = key3Open = false;
+        key1Interrupt = key2Interrupt = key3Interrupt = -1;
         
         s1EnemyHPBar.setForeground(Color.red);
         s1EnemyHPBar.setValue(GameManager.goblinHP);
@@ -250,6 +252,7 @@ public class Scene1 extends Scene implements GetDetectName{
         // TODO add your handling code here:
         if(s1Key1.isEnabled()==false) return;
         key1cnt ++;
+        key1Open = !key1Open;
         // <editor-fold defaultstate="collapsed" desc="open key"> 
         if(key1cnt%2 == 1){
             Util.moveButton(s1Key1, 320, 190);
@@ -258,7 +261,9 @@ public class Scene1 extends Scene implements GetDetectName{
             t[idx]= new Timer(1000,new ActionListener(){
             //@override
             public void actionPerformed(ActionEvent e) {
-                if(timeCounter[idx]<=3) key1OpenPerformed(timeCounter[idx]);
+                if(!key1Open) { key1Interrupt = idx;  t[idx].stop(); return; }
+               if(key1Interrupt != -1) {  idx = key1Interrupt; key1Interrupt = -1; }
+                if(timeCounter[idx]<=3) key1OpenPerformed(timeCounter[idx],idx);
                 else if(timeCounter[idx] > 3){
                     if (key2Open) { s1_EnemyDetect.setVisible(true); GameManager.goblinDamaged();}
                     if (key3Open) { s1_PlayerDetect.setVisible(true); GameManager.playerDamaged(); }
@@ -276,12 +281,12 @@ public class Scene1 extends Scene implements GetDetectName{
             Util.moveButton(s1Key1, 400, 190);
             
         }
-        //</editor-fold>
-        key1Open = !key1Open;
+        //</editor-fold> 
+        
     }//GEN-LAST:event_s1Key1ActionPerformed
     //</editor-fold>
     
-    private void key1OpenPerformed(int timerCounter){
+    private void key1OpenPerformed(int timerCounter,int idx){
         if(timerCounter == 0) {
              s1_top1.setVisible(false);
              s1_bottom1.setVisible(true);

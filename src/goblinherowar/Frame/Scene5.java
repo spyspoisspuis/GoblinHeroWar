@@ -1,29 +1,47 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package goblinherowar.Frame;
 
+import goblinherowar.API.Util;
 import goblinherowar.API.GameManager;
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.Timer;
 
-/**
- *
- * @author peeravich.c
- */
 public class Scene5 extends Scene implements GetDetectName{
 
-    /**
-     * Creates new form Scene5
-     */
+    private int key1cnt,key2cnt,key3cnt,key4cnt,key5cnt,key6cnt;
+    private int key1Interrupt,key2Interrupt,key4Interrupt,key5Interrupt;
+    private boolean key1Onprogress,key2Onprogress,key5Onprogress,key4Onprogress;
+    private boolean key1Open,key2Open,key3Open,key4Open,key5Open,key6Open;
+    private boolean key1Done,key2Done,key5Done,key4Done;
+    private Timer[] t = new Timer[10];
+    private int[] timeCounter = new int[10];
+    private int[] keytimer =new int[6];
+    private int idx = 0;
+    private JButton k1,k2,k3,k4,k5,k6;
+    private int sequence = 0;
+    
     public Scene5() {
         initComponents();
-        
+        GameManager.setGoblinBar(enemyHPBar);
+        GameManager.setPlayerBar(playerHPBar);
+        k1 = new JButton();
+        k1.setLocation(key1.getX(), key1.getY());
+        k2 = new JButton();
+        k2.setLocation(key2.getX(), key2.getY());
+        k3 = new JButton();
+        k3.setLocation(key3.getX(), key3.getY());
+        k4 = new JButton();
+        k4.setLocation(key4.getX(), key4.getY());       
+        k5 = new JButton();
+        k5.setLocation(key5.getX(), key5.getY());        
+        k6 = new JButton();
+        k6.setLocation(key6.getX(), key6.getY());
+
         resetScene();
-        //GameManager.setGoblinBar(s1EnemyHPBar);
-        //GameManager.setPlayerBar(s1PlayerHPBar);
     }
     
     // <editor-fold defaultstate="collapsed" desc="Scene Method">
@@ -93,15 +111,24 @@ public class Scene5 extends Scene implements GetDetectName{
         bottom2_R.setVisible(false);
         enemyDetect.setVisible(false);
         playerDetect.setVisible(false);
-        /*
-        key1cnt = key2cnt = key3cnt = 0;
-        key1Open = key2Open = key3Open = false;
+        Util.moveButton(key1,k1.getX(),k1.getY());
+        Util.moveButton(key2,k2.getX(),k2.getY());
+        Util.moveButton(key3,k3.getX(),k3.getY());
+        Util.moveButton(key4,k4.getX(),k4.getY());
+        Util.moveButton(key5,k5.getX(),k5.getY());
+        Util.moveButton(key6,k6.getX(),k6.getY());
+        
+        key1cnt = key2cnt = key3cnt = key4cnt = key5cnt = key6cnt = 0;
+        key1Interrupt = key2Interrupt = key5Interrupt = key4Interrupt  = -1;
+        key1Open = key2Open = key3Open = key4Open = key5Open = key6Open = false;
+        key1Onprogress = key2Onprogress = key5Onprogress = key4Onprogress = false;
+        key1Done = key2Done = key5Done = key4Done = false;
         
         enemyHPBar.setForeground(Color.red);
         enemyHPBar.setValue(GameManager.goblinHP);
         playerHPBar.setForeground(Color.red);
         playerHPBar.setValue(GameManager.heroHP);
-        */
+
     }
 //</editor-fold>
 
@@ -143,31 +170,63 @@ public class Scene5 extends Scene implements GetDetectName{
         playerDetect = new javax.swing.JLabel();
         enemyDetect = new javax.swing.JLabel();
         setting = new javax.swing.JButton();
+        enemyHPBar = new javax.swing.JProgressBar();
+        playerHPBar = new javax.swing.JProgressBar();
         Scene5 = new javax.swing.JLabel();
 
         setLayout(null);
 
         key1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene5Component/key1.png"))); // NOI18N
+        key1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                key1ActionPerformed(evt);
+            }
+        });
         add(key1);
         key1.setBounds(110, 140, 130, 60);
 
         key2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene5Component/key2.png"))); // NOI18N
+        key2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                key2ActionPerformed(evt);
+            }
+        });
         add(key2);
         key2.setBounds(680, 90, 130, 60);
 
         key3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene5Component/key3.png"))); // NOI18N
+        key3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                key3ActionPerformed(evt);
+            }
+        });
         add(key3);
         key3.setBounds(220, 200, 70, 130);
 
         key4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene5Component/key4.png"))); // NOI18N
+        key4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                key4ActionPerformed(evt);
+            }
+        });
         add(key4);
         key4.setBounds(440, 230, 130, 60);
 
         key5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene5Component/key5.png"))); // NOI18N
+        key5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                key5ActionPerformed(evt);
+            }
+        });
         add(key5);
         key5.setBounds(710, 180, 130, 60);
 
         key6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene5Component/key6.png"))); // NOI18N
+        key6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                key6ActionPerformed(evt);
+            }
+        });
         add(key6);
         key6.setBounds(730, 270, 130, 60);
 
@@ -266,7 +325,11 @@ public class Scene5 extends Scene implements GetDetectName{
             }
         });
         add(setting);
-        setting.setBounds(880, 10, 67, 70);
+        setting.setBounds(880, 10, 57, 70);
+        add(enemyHPBar);
+        enemyHPBar.setBounds(165, 498, 120, 20);
+        add(playerHPBar);
+        playerHPBar.setBounds(720, 497, 120, 20);
 
         Scene5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene5Component/Scene5.jpg"))); // NOI18N
         Scene5.setSize(new java.awt.Dimension(960, 540));
@@ -287,6 +350,418 @@ public class Scene5 extends Scene implements GetDetectName{
         key6.setEnabled(false);
     }//GEN-LAST:event_settingActionPerformed
 
+    private void key1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_key1ActionPerformed
+        // TODO add your handling code here:
+        if(!key1.isEnabled()) return;
+        key1Open = !key1Open;
+        key1cnt++;
+        // <editor-fold defaultstate="collapsed" desc="open key"> 
+        if(key1cnt%2==1) {
+            Util.moveButton(key1,key1.getX()-80,key1.getY());
+            if(key1Done) return;
+            key1Onprogress = true;
+            keytimer[0] = recheckTimerIdx();
+ 
+            timeCounter[keytimer[0]] = 0;
+            t[keytimer[0]] = new Timer(1000, new ActionListener() {
+                //@override
+                public void actionPerformed(ActionEvent e) {
+                    int idx = keytimer[0];
+                    
+                    if(key1Done) return;
+                    if(!key1Open) { key1Onprogress =false; key1Interrupt = idx;  t[idx].stop(); return; }
+                    if(key1Interrupt != -1) {  idx = key1Interrupt; key1Interrupt = -1; }
+                    if(timeCounter[idx]<4) {
+                        openkey1(timeCounter[idx],idx);
+                    }
+                    else if(timeCounter[idx]>=4){
+                        if(key4Open)
+                            openkey4(timeCounter[idx]-4,idx,1);
+                    }
+                    timeCounter[idx]++;
+                }
+            }); t[keytimer[0]].start();
+        }
+        //</editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="close key"> 
+        else{
+            Util.moveButton(key1, key1.getX()+80, key1.getY());
+            key1Onprogress = false;
+        }
+ //</editor-fold>
+    }//GEN-LAST:event_key1ActionPerformed
+    private void openkey1(int timerCounter,int idx){
+        if (timerCounter == 0){
+            mid1_L.setVisible(true);
+            top1_L.setVisible(false);
+        }
+        else  if (timerCounter == 1){
+            mid2_L.setVisible(true);
+            top2_L.setVisible(false);
+        }
+        else  if (timerCounter == 2){
+            mid3_L.setVisible(true);
+            top3_L.setVisible(false);
+        }
+        else {
+            if(!mid1_M.isVisible()) { top4_L.setVisible(false); mid1_M.setVisible(true); }
+            if(!key4Open) endkey1(idx);
+        }
+    }
+    private void endkey1(int idx){
+        key1Onprogress = false;
+        key1Done = true;
+        t[idx].stop();
+        timeCounter[idx] = 0;
+    }
+    
+    private void key4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_key4ActionPerformed
+        // TODO add your handling code here:
+        if(!key4.isEnabled()) return;
+        key4Open = !key4Open;
+        key4cnt++;
+        // <editor-fold defaultstate="collapsed" desc="open key"> 
+        if(key4cnt%2==1) {
+            Util.moveButton(key4,key4.getX()+80,key4.getY());
+            if(key4Done) return;
+            if(!mid1_M.isVisible()) return;
+            if(key1Onprogress) return;
+            if(key2Onprogress ) return;
+            key4Onprogress = true;
+            keytimer[3]= recheckTimerIdx();
+            timeCounter[keytimer[3]] = 0;
+            t[keytimer[3]] = new Timer(1000, new ActionListener() {
+                //@override
+                public void actionPerformed(ActionEvent e) {
+                    int idx = keytimer[3];
+                    
+                    if(key4Done) return;
+                    if(!key4Open) { key4Onprogress = false; key4Interrupt = idx;  t[idx].stop(); return; }
+                    if(key4Interrupt != -1) {  idx = key4Interrupt; key4Interrupt = -1; }
+                    openkey4(timeCounter[idx],idx,4);
+                    timeCounter[idx]++;
+                }
+            });t[keytimer[3]].start();
+        } 
+        //</editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="close key"> 
+        else{
+            Util.moveButton(key4, key4.getX()-80, key4.getY());
+            key4Onprogress = false;
+        }
+ //</editor-fold>
+    }//GEN-LAST:event_key4ActionPerformed
+    private void openkey4(int t,int idx,int key){
+        if (bottom2_R.isVisible()){
+            if(key==1) endkey1(idx); 
+            else if(key==2) endkey2(idx); 
+            else if (key ==4) endkey4(idx);
+            return;
+        }
+        if (t == 0){
+            bottom_M.setVisible(true);
+            if(key == 1) mid1_L.setVisible(false);
+            else if (key==4){
+                if(mid1_L.isVisible())
+                    mid1_L.setVisible(false);
+                else mid1_R.setVisible(false);
+            }
+            else if(key==2) mid1_R.setVisible(false);
+        }
+        else if (t == 1){
+            bottom_L.setVisible(true);
+            if (key == 2) 
+                top4_R.setVisible(false);
+            else if(key==1) {
+                mid2_L.setVisible(false);
+                
+            }
+            else if (key == 4){
+                if(top4_R.isVisible())
+                    top4_R.setVisible(false);
+                else mid2_L.setVisible(false);
+            }
+        }
+        else  if (t == 2){
+            bottom1_R.setVisible(true);
+            if (key == 2) {
+                mid2_R.setVisible(false);
+            }
+            else if(key==1) {
+                mid3_L.setVisible(false);
+            }
+            else if (key == 4){
+                if(mid2_R.isVisible())
+                    mid2_R.setVisible(false);
+                else mid3_L.setVisible(false);
+            }
+
+        }
+        
+        else  if (t == 3){
+            bottom2_R.setVisible(true);
+            mid1_M.setVisible(false);
+            if(key3Open)
+            {
+                enemyDamage(); 
+                if(key==1) endkey1(idx); 
+                else if(key==2) endkey2(idx); 
+                else if (key ==4) endkey4(idx);
+            }
+        }
+        else if (t==4){
+            if(key6Open) playerDamage();
+            if(key==1) endkey1(idx); 
+            else if(key==2) endkey2(idx); 
+            else if (key ==4) endkey4(idx);   
+        }
+    }
+    private void endkey4(int idx){
+        key4Onprogress = false;
+        key4Done = true;
+        t[idx].stop();
+        timeCounter[idx] = 0;
+    }
+        
+    private void key2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_key2ActionPerformed
+        // TODO add your handling code here:
+        if(!key2.isEnabled()) return;
+        key2Open = !key2Open;
+        key2cnt++;
+        // <editor-fold defaultstate="collapsed" desc="open key"> 
+        if (key2cnt % 2 == 1) {
+            Util.moveButton(key2, key2.getX() + 80, key2.getY());
+            if(key2Done) return;
+            key2Onprogress = true;
+            keytimer[1] = recheckTimerIdx();
+   
+            timeCounter[keytimer[1]] = 0;
+            t[keytimer[1]] = new Timer(1000, new ActionListener() {
+                //@override
+                public void actionPerformed(ActionEvent e) {
+                    int idx =keytimer[1];
+          
+                    if(key2Done) return;
+                    if (!key2Open) { key2Onprogress =false; key2Interrupt = idx; t[idx].stop();return;}
+                    if (key2Interrupt != -1) {idx = key2Interrupt; key2Interrupt = -1;}
+                    openkey2(timeCounter[idx],idx);
+                    if(key5Open && mid1_R.isVisible()){
+                        int k = timeCounter[idx]-2+getkey5sequence();
+                        openkey5(k,idx,2);
+                    }
+                    if(key4Open && mid1_M.isVisible()) openkey4(timeCounter[idx]-4,idx,2);
+       
+                    timeCounter[idx]++;
+                }
+            });
+            t[keytimer[1]].start();
+        }
+        //</editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="close key"> 
+        else{
+            Util.moveButton(key2, key2.getX()-80, key2.getY());
+            key2Onprogress = false;
+        }
+ //</editor-fold>
+    }//GEN-LAST:event_key2ActionPerformed
+    private void openkey2(int timerCounter,int idx){
+        if(timerCounter == 0) top4_R.setVisible(true);
+        else if (timerCounter == 1){
+            mid1_R.setVisible(true);
+            mid2_R.setVisible(true);
+            top1_R.setVisible(false);
+        }
+        else if (timerCounter == 2){
+            mid3_R.setVisible(true);
+            top2_R.setVisible(false);
+        }
+        else if (timerCounter == 3){
+            mid1_M.setVisible(true);
+            top3_R.setVisible(false);
+            if(!key5Open && !key4Open) endkey2(idx);
+        }
+    }
+    private void endkey2(int idx){
+        key2Onprogress = false;
+        key2Done = true;
+        t[idx].stop();
+        timeCounter[idx] = 0;
+    }
+    
+    
+    private void key6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_key6ActionPerformed
+        // TODO add your handling code here:
+        if(!key6.isEnabled()) return;
+        key6Open = !key6Open;
+        key6cnt++;
+        // <editor-fold defaultstate="collapsed" desc="open key"> 
+        if(key6cnt%2==1) {
+            Util.moveButton(key6,key6.getX()+80,key6.getY());
+            if(key2Onprogress || key5Onprogress || (key1Onprogress  && key4Open && !key3Open) || (key4Onprogress && !key3Open))
+                return;
+            if(!bottom2_R.isVisible()) return;
+            keytimer[5] = recheckTimerIdx();
+            t[keytimer[5]] = new Timer(1000, new ActionListener() {
+                //@override
+                public void actionPerformed(ActionEvent e) { 
+                    playerDamage();
+                    t[keytimer[5]].stop(); 
+
+                }
+            });
+             t[keytimer[5]].start();   
+        } 
+        //</editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="close key"> 
+        else{
+            Util.moveButton(key6, key6.getX()-80, key6.getY());
+            stopplayerDamage();
+        }
+ //</editor-fold>
+    }//GEN-LAST:event_key6ActionPerformed
+
+    private void key5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_key5ActionPerformed
+        // TODO add your handling code here:
+        if(!key5.isEnabled()) return;
+        key5Open = !key5Open;
+        key5cnt++;
+        // <editor-fold defaultstate="collapsed" desc="open key"> 
+        if(key5cnt%2==1) {
+            Util.moveButton(key5,key5.getX()-80,key5.getY());
+            key5sequencing();
+            if(key5Done) return;
+            if(key2Onprogress) return;
+            if(!mid1_R.isVisible()) return;
+            key5Onprogress = true;
+            keytimer[4] = recheckTimerIdx();
+            timeCounter[keytimer[4]] = 0;
+            t[keytimer[4]] = new Timer(1000, new ActionListener() {
+                //@override
+                public void actionPerformed(ActionEvent e) {
+                    int idx = keytimer[4];
+                    if(key5Done) return;
+                    if(!key5Open) { key5Interrupt = idx;  t[idx].stop(); return; }
+                    if(key5Interrupt != -1) {  idx = key5Interrupt; key5Interrupt = -1; }
+                    
+                    openkey5(timeCounter[idx],idx,5);
+                    timeCounter[idx]++;
+                    
+                }
+            });t[keytimer[4]].start();
+        } 
+        //</editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="close key"> 
+        else{
+            Util.moveButton(key5, key5.getX()+80, key5.getY());
+            key5Onprogress = false;
+        }
+ //</editor-fold>
+    }//GEN-LAST:event_key5ActionPerformed
+    private void openkey5(int t,int idx,int key){
+        if (t==0) mid2_M.setVisible(true);
+        else if (t==1) bottom2_R.setVisible(true);
+        else if (t==2) {
+            if(key6Open) playerDamage();
+            else bottom1_R.setVisible(true);
+            if(key==5) endkey5(idx);
+            else if (key==2) endkey2(idx);
+        }
+        checktopright(t);
+    }
+    private void key5sequencing(){
+        sequence = 0;
+        if(mid1_R.isVisible()) sequence =  1;
+        if(mid3_R.isVisible()) sequence =2;
+        if(mid1_M.isVisible()) sequence =3;
+        
+    }
+    private int getkey5sequence() {return sequence;}
+    private void endkey5(int idx){
+        key5Onprogress = false;
+        key5Done = true;
+        t[idx].stop();
+        timeCounter[idx] = 0;
+    }
+    
+    private void key3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_key3ActionPerformed
+        // TODO add your handling code here:
+        if(!key3.isEnabled()) return;
+        key3Open = !key3Open;
+        key3cnt++;
+        // <editor-fold defaultstate="collapsed" desc="open key"> 
+        if(key3cnt%2==1) {
+            Util.moveButton(key3,key3.getX(),key3.getY()-50);
+            if((key1Onprogress && key4Open) || key4Onprogress)
+                return;
+            if(!bottom_L.isVisible()) return;
+            keytimer[2] = recheckTimerIdx();
+            t[keytimer[2]] = new Timer(1000, new ActionListener() {
+                //@override
+                public void actionPerformed(ActionEvent e) { 
+                    enemyDamage();
+                    t[keytimer[2]].stop();   
+                }
+            });
+             t[keytimer[2]].start();    
+        } 
+        //</editor-fold>
+        // <editor-fold defaultstate="collapsed" desc="close key"> 
+        else{
+            Util.moveButton(key3, key3.getX(), key3.getY()+50);
+            stopenemyDamage();
+        }
+ //</editor-fold>
+    }//GEN-LAST:event_key3ActionPerformed
+
+    private void checktopright(int t){
+        if (bottom1_R.isVisible()) return;
+        if (t==0) {
+            if(top1_R.isVisible()) top1_R.setVisible(false);
+            else if(top2_R.isVisible()) top2_R.setVisible(false);
+            else if(top3_R.isVisible()) top3_R.setVisible(false);
+            else if(top4_R.isVisible()) top4_R.setVisible(false);
+            else if(mid3_R.isVisible()) mid3_R.setVisible(false);
+            else if(mid2_R.isVisible()) mid2_R.setVisible(false);
+        }
+        if (t==1) {
+            if(top2_R.isVisible()) top2_R.setVisible(false);
+            else if(top3_R.isVisible()) top3_R.setVisible(false);
+            else if(top4_R.isVisible()) top4_R.setVisible(false);
+            else if(mid3_R.isVisible()) mid3_R.setVisible(false);
+            else if(mid2_R.isVisible()) mid2_R.setVisible(false);
+            else if(mid1_R.isVisible()) mid1_R.setVisible(false);
+        }
+        if (t==2) {
+            if(top3_R.isVisible()) top3_R.setVisible(false);
+            else if(top4_R.isVisible()) top4_R.setVisible(false);
+            else if(mid3_R.isVisible()) mid3_R.setVisible(false);
+            else if(mid2_R.isVisible()) mid2_R.setVisible(false);
+            else if(mid1_R.isVisible()) mid1_R.setVisible(false);
+        }
+    }
+    
+    private void enemyDamage(){
+        enemyDetect.setVisible(true);
+        GameManager.goblinDamaged();
+    }
+    private void playerDamage(){
+        playerDetect.setVisible(true);
+        GameManager.playerDamaged();
+    }
+    private void stopenemyDamage(){
+        enemyDetect.setVisible(false);
+        GameManager.stopGoblinDamage();
+    }
+    private void stopplayerDamage(){
+        playerDetect.setVisible(false);
+        GameManager.stopHeroDamaged();
+    }
+    
+    private int recheckTimerIdx(){
+        if (idx == timeCounter.length-1)  idx = 0; 
+        else  idx+=1;
+        return idx;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Scene5;
@@ -295,6 +770,7 @@ public class Scene5 extends Scene implements GetDetectName{
     private javax.swing.JLabel bottom_L;
     private javax.swing.JLabel bottom_M;
     private javax.swing.JLabel enemyDetect;
+    private javax.swing.JProgressBar enemyHPBar;
     private javax.swing.JButton key1;
     private javax.swing.JButton key2;
     private javax.swing.JButton key3;
@@ -310,6 +786,7 @@ public class Scene5 extends Scene implements GetDetectName{
     private javax.swing.JLabel mid3_L;
     private javax.swing.JLabel mid3_R;
     private javax.swing.JLabel playerDetect;
+    private javax.swing.JProgressBar playerHPBar;
     private javax.swing.JButton setting;
     private javax.swing.JLabel top1_L;
     private javax.swing.JLabel top1_R;
