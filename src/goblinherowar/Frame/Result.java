@@ -6,6 +6,7 @@
 package goblinherowar.Frame;
 
 import goblinherowar.API.GameManager;
+import goblinherowar.API.SceneManager;
 import java.awt.Color;
 
 /**
@@ -158,19 +159,19 @@ public class Result extends Scene {
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
         // TODO add your handling code here:
         MainFrame.setSceneVisible(12, false);
-        MainFrame.setSceneVisible(1, false);    //SceneManager.currentIdx
+        MainFrame.setSceneVisible(SceneManager.currentIdx, false);
         MainFrame.midResetScene();
-        //SceneManager.randomScene
-        MainFrame.addScene(2, 0);   //SceneManager.currentIdx
-        MainFrame.setSceneVisible(2,true);  //SceneManager.currentIdx
-        MainFrame.setTransparent(2);    //SceneManager.currentIdx
+        SceneManager.randomScene();
+        MainFrame.addScene(SceneManager.currentIdx, 0);
+        MainFrame.setSceneVisible(SceneManager.currentIdx,true);
+        MainFrame.setTransparent(SceneManager.currentIdx);
         resetScene();
     }//GEN-LAST:event_nextActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
         MainFrame.setSceneVisible(12,false);
-        MainFrame.setSceneVisible(1, false); //SceneManager.currentIdx
+        MainFrame.setSceneVisible(SceneManager.currentIdx, false);
         MainFrame.midResetScene();
         MainFrame.setSceneVisible(0,true);
         resetScene();

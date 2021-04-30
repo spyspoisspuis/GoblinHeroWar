@@ -55,14 +55,14 @@ public class MainFrame extends javax.swing.JFrame{
     }
     
     public static void setKeyButtonEnabled(boolean set){
-        for(int i=0;i<buttonScene.get(1).size();i++){     //buttonScene.get(SceneManager.currentIdx).size()
-            buttonScene.get(1).get(i).setEnabled(set);      //buttonScene.get(SceneManager.currentIdx).get(i)
+        for(int i=0;i<buttonScene.get(SceneManager.currentIdx).size();i++){
+            buttonScene.get(SceneManager.currentIdx).get(i).setEnabled(set);
         }
     }
     
     public static void setKeyButtonVisible(boolean set){
-        for(int i=0;i<buttonScene.get(1).size();i++){     //buttonScene.get(SceneManager.currentIdx).size()
-            buttonScene.get(1).get(i).setVisible(set);      //buttonScene.get(SceneManager.currentIdx).get(i)
+        for(int i=0;i<buttonScene.get(SceneManager.currentIdx).size();i++){
+            buttonScene.get(SceneManager.currentIdx).get(i).setVisible(set);
         }
     }
     
@@ -71,8 +71,7 @@ public class MainFrame extends javax.swing.JFrame{
     }
     
     public static void midResetScene(){
-        int s=1;    //TEST
-        switch(s){      //SceneManager.currentIdx
+        switch(SceneManager.currentIdx){
             case 1:
                 scene.get(1).resetScene();
             case 2:
@@ -87,7 +86,8 @@ public class MainFrame extends javax.swing.JFrame{
                 scene.get(6).resetScene();
             case 7:
                 scene.get(7).resetScene();
-            
+            case 10:
+                scene.get(10).resetScene();
             default:    break;
         }
     }
@@ -108,10 +108,10 @@ public class MainFrame extends javax.swing.JFrame{
     }
     
     public static void setTransparent(int s){
-        for(int i=0;i<buttonScene.get(1).size();i++){     //buttonScene.get(SceneManager.currentIdx).size())
-            buttonScene.get(1).get(i).setOpaque(false);
-            buttonScene.get(1).get(i).setContentAreaFilled(false);     //buttonScene.get(SceneManager.currentIdx).get(i)
-            buttonScene.get(1).get(i).setBorderPainted(false);
+        for(int i=0;i<buttonScene.get(s).size();i++){
+            buttonScene.get(s).get(i).setOpaque(false);
+            buttonScene.get(s).get(i).setContentAreaFilled(false);
+            buttonScene.get(s).get(i).setBorderPainted(false);
         }
     }
  //</editor-fold>  
@@ -201,43 +201,37 @@ public class MainFrame extends javax.swing.JFrame{
         scene.add(result);
         
         
-       // heroDetect[1]=s1.getPlayerDetectName();
-        /*
+        heroDetect[1]=s1.getPlayerDetectName();
         heroDetect[2]=s2.getPlayerDetectName();
         heroDetect[3]=s3.getPlayerDetectName();
         heroDetect[4]=s4.getPlayerDetectName();
         heroDetect[5]=s5.getPlayerDetectName();
         heroDetect[6]=s6.getPlayerDetectName();
         heroDetect[7]=s7.getPlayerDetectName();
-        heroDetect[8]=s8.getPlayerDetectName();
-        heroDetect[9]=s9.getPlayerDetectName();
+        /*
         heroDetect[10]=s10.getPlayerDetectName();
         */
         
         goblinDetect[1]=s1.getEnemyDetectName();
-        /*
         goblinDetect[2]=s2.getEnemyDetectName();
         goblinDetect[3]=s3.getEnemyDetectName();
         goblinDetect[4]=s4.getEnemyDetectName();
         goblinDetect[5]=s5.getEnemyDetectName();
         goblinDetect[6]=s6.getEnemyDetectName();
         goblinDetect[7]=s7.getEnemyDetectName();
-        goblinDetect[8]=s8.getEnemyDetectName();
-        goblinDetect[9]=s9.getEnemyDetectName();
+        /*
         goblinDetect[10]=s10.getEnemyDetectName();
         */
         
         buttonScene.add(home.getButton());
         buttonScene.add(s1.getButton());
-        /*
         buttonScene.add(s2.getButton());
         buttonScene.add(s3.getButton());
         buttonScene.add(s4.getButton());
         buttonScene.add(s5.getButton());
         buttonScene.add(s6.getButton());
         buttonScene.add(s7.getButton());
-        buttonScene.add(s8.getButton());
-        buttonScene.add(s9.getButton());
+        /*
         buttonScene.add(s10.getButton());
         */
         //</editor-fold>

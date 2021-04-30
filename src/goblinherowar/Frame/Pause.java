@@ -21,7 +21,7 @@ public class Pause extends Scene {
      * Creates new form Pause
      */
     
-    // <editor-fold defaultstate="collapsed" desc="Pause() Constructor">  
+    // <editor-fold defaultstate="collapsed" desc="Pause Constructor">  
     public Pause() {
         initComponents();
         this.setBackground(new Color(0,0,0,50));
@@ -101,7 +101,6 @@ public class Pause extends Scene {
 
     private void retryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retryActionPerformed
         // TODO add your handling code here:
-        int scTEST = 1;
         MainFrame.setSceneVisible(11,false);
         MainFrame.midResetScene();
     }//GEN-LAST:event_retryActionPerformed
@@ -111,13 +110,13 @@ public class Pause extends Scene {
         GameManager.resumeGame();
         MainFrame.setSceneVisible(11,false);
         MainFrame.setKeyButtonEnabled(true);
-        MainFrame.addScene(1,0);         //SceneManager.currentIdx
+        MainFrame.addScene(SceneManager.currentIdx,0);
     }//GEN-LAST:event_resumeActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
         MainFrame.setSceneVisible(11,false);
-        MainFrame.setSceneVisible(1, false); //SceneManager.currentIdx
+        MainFrame.setSceneVisible(SceneManager.currentIdx, false);
         MainFrame.midResetScene();
         MainFrame.setSceneVisible(0,true);
     }//GEN-LAST:event_exitActionPerformed
