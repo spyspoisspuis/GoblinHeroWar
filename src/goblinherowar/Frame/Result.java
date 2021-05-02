@@ -62,6 +62,8 @@ public class Result extends Scene {
             star2.setVisible(true);
             star3.setVisible(true);
         }
+        GameManager.cntScene ++;
+        if(GameManager.cntScene%8 ==0) SceneManager.resetSc();
     }
     
     public void getLoseScene(){
@@ -158,10 +160,10 @@ public class Result extends Scene {
 
     private void nextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextActionPerformed
         // TODO add your handling code here:
-        MainFrame.setSceneVisible(12, false);
+        MainFrame.setSceneVisible(10, false);
         MainFrame.setSceneVisible(SceneManager.currentIdx, false);
-        MainFrame.midResetScene();
         SceneManager.randomScene();
+        MainFrame.midResetScene();  
         MainFrame.addScene(SceneManager.currentIdx, 0);
         MainFrame.setSceneVisible(SceneManager.currentIdx,true);
         MainFrame.setTransparent(SceneManager.currentIdx);
@@ -170,16 +172,17 @@ public class Result extends Scene {
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
-        MainFrame.setSceneVisible(12,false);
+        MainFrame.setSceneVisible(10,false);
         MainFrame.setSceneVisible(SceneManager.currentIdx, false);
         MainFrame.midResetScene();
         MainFrame.setSceneVisible(0,true);
+        GameManager.exitGame();
         resetScene();
     }//GEN-LAST:event_exitActionPerformed
 
     private void retryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retryActionPerformed
         // TODO add your handling code here:
-        MainFrame.setSceneVisible(12,false);
+        MainFrame.setSceneVisible(10,false);
         MainFrame.midResetScene();
         resetScene();
     }//GEN-LAST:event_retryActionPerformed

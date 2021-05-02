@@ -25,4 +25,10 @@ public class Scene extends JPanel{
     public void getLoseScene(){
         
     }
+    public void closeAllTimer(){
+        
+    }
+    public void setHPBar(){
+        
+    }
 }

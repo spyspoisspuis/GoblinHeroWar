@@ -21,13 +21,13 @@ public class Scene6 extends Scene implements GetDetectName{
 
     // <editor-fold defaultstate="collapsed" desc="instance variable"> 
     private int key1cnt,key2cnt,key3cnt,key4cnt,key5cnt,key6cnt;
-    private int key1Interrupt,key2Interrupt,key3Interrupt,key4Interrupt;
+    private int[] keyInterrupt = new int[6];
     private boolean key1Onprogress,key2Onprogress,key3Onprogress,key4Onprogress,key5Onprogress,key6Onprogress;
     private boolean key1Open,key2Open,key3Open,key4Open,key5Open,key6Open;
     private int[] keytimer =new int[6];
     private boolean key1Done,key2Done,key3Done,key4Done;
-    private Timer[] t = new Timer[10];
-    private int[] timeCounter = new int[10];
+    private Timer[] t = new Timer[6];
+    private int[] timeCounter = new int[6];
     private int idx = 0;
     private JButton k1,k2,k3,k4,k5,k6;
     private int sequence = 0;
@@ -37,10 +37,7 @@ public class Scene6 extends Scene implements GetDetectName{
      */
     public Scene6() {
         initComponents();
-        
-        
-        GameManager.setGoblinBar(enemyHPBar);
-        GameManager.setPlayerBar(playerHPBar);
+  
         
         k1 = new JButton();
         k1.setLocation(key1.getX(), key1.getY());
@@ -95,14 +92,6 @@ public class Scene6 extends Scene implements GetDetectName{
         key4.setVisible(true);
         key5.setVisible(true);
         key6.setVisible(true);
-        /*
-        key1.setLocation(,);
-        key2.setLocation(,);
-        key3.setLocation(,);
-        key4.setLocation(,);
-        key5.setLocation(,);
-        key6.setLocation(,);
-        */
         top1.setVisible(true);
         top2.setVisible(true);
         top3.setVisible(true);
@@ -127,7 +116,6 @@ public class Scene6 extends Scene implements GetDetectName{
         Util.moveButton(key6,k6.getX(),k6.getY());
         
         key1cnt = key2cnt = key3cnt = key4cnt = key5cnt = key6cnt = 0;
-        key1Interrupt = key2Interrupt = key3Interrupt = key4Interrupt  = -1;
         key1Open = key2Open = key3Open = key4Open = key5Open = key6Open = false;
         key1Onprogress = key2Onprogress = key3Onprogress = key4Onprogress = key5Onprogress = key6Onprogress = false;
         key1Done = key2Done = key3Done = key4Done = false;
@@ -135,6 +123,11 @@ public class Scene6 extends Scene implements GetDetectName{
         enemyHPBar.setValue(GameManager.goblinHP);
         playerHPBar.setForeground(Color.red);
         playerHPBar.setValue(GameManager.heroHP);
+        
+        for (int i =0;i<keytimer.length;i++)
+            keytimer[i]  = -1;
+        for (int i =0;i<keyInterrupt.length;i++)
+            keyInterrupt[i]  = -1;
     }
 //</editor-fold>
 
@@ -303,9 +296,9 @@ public class Scene6 extends Scene implements GetDetectName{
         add(setting);
         setting.setBounds(880, 10, 57, 70);
         add(enemyHPBar);
-        enemyHPBar.setBounds(150, 498, 120, 20);
+        enemyHPBar.setBounds(140, 496, 130, 22);
         add(playerHPBar);
-        playerHPBar.setBounds(720, 497, 120, 20);
+        playerHPBar.setBounds(707, 496, 130, 22);
 
         Scene6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene6Component/Scene6.jpg"))); // NOI18N
         Scene6.setSize(new java.awt.Dimension(960, 540));
@@ -316,14 +309,15 @@ public class Scene6 extends Scene implements GetDetectName{
     private void settingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingActionPerformed
         // TODO add your handling code here:
         GameManager.pauseGame();
-        MainFrame.addScene(11,0);
-        MainFrame.setSceneVisible(11,true);
+        MainFrame.addScene(9,0);
+        MainFrame.setSceneVisible(9,true);
         key1.setEnabled(false);
         key2.setEnabled(false);
         key3.setEnabled(false);
         key4.setEnabled(false);
         key5.setEnabled(false);
         key6.setEnabled(false);
+        Pause.pause(t, keyInterrupt, keytimer);
     }//GEN-LAST:event_settingActionPerformed
 
     private void key1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_key1ActionPerformed
@@ -343,9 +337,9 @@ public class Scene6 extends Scene implements GetDetectName{
                 //@override
                 public void actionPerformed(ActionEvent e) {
                     int idx = keytimer[0];
-                    if(key1Done) return;
-                    if(!key1Open) { key1Interrupt = idx;  t[idx].stop(); return; }
-                    if(key1Interrupt != -1) {  idx = key1Interrupt; key1Interrupt = -1; }
+                    if(key1Done) t[idx].stop();
+                    if(!key1Open) { keyInterrupt[0] = idx;  t[idx].stop();  }
+                    if(keyInterrupt[0] != -1) {  idx = keyInterrupt[0]; keyInterrupt[0] = -1; }
                     key1firststep(timeCounter[idx],idx);
                     if (key3Open) 
                         openkey3(timeCounter[idx]-2,idx,1);
@@ -397,9 +391,9 @@ public class Scene6 extends Scene implements GetDetectName{
                 //@override
                 public void actionPerformed(ActionEvent e) {
                     int idx = keytimer[2];
-                    if(key3Done) return;
-                    if(!key3Open) { key3Interrupt = idx;  t[idx].stop(); return; }
-                    if(key3Interrupt != -1) {idx= key3Interrupt; key3Interrupt = -1; }
+                    if(key3Done) t[idx].stop();;
+                    if(!key3Open) { keyInterrupt[2] = idx;  t[idx].stop();  }
+                    if(keyInterrupt[2] != -1) {idx= keyInterrupt[2]; keyInterrupt[2] = -1; }
                     openkey3(timeCounter[idx],idx,3);
                     timeCounter[idx]++;
                 }
@@ -420,11 +414,10 @@ public class Scene6 extends Scene implements GetDetectName{
             bottom2_L.setVisible(true);
         }
         else if (timerCounter == 2){
-            if (!key5Open) mid5_R.setVisible(true); 
-            else {
+            mid5_R.setVisible(true); 
+            if(key5Open) {
                 mid1_L.setVisible(false);
                 enemyDamage();
-
             }
         }
         else if (timerCounter == 3) {
@@ -495,9 +488,9 @@ public class Scene6 extends Scene implements GetDetectName{
                 //@override
                 public void actionPerformed(ActionEvent e) {
                     int idx = keytimer[1];
-                    if(key2Done) return;
-                    if(!key2Open) { key2Interrupt = idx;  t[idx].stop(); return; }
-                    if(key2Interrupt != -1) {  idx = key2Interrupt; key2Interrupt = -1; }
+                    if(key2Done) t[idx].stop();
+                    if(!key2Open) { keyInterrupt[1] = idx;  t[idx].stop(); }
+                    if(keyInterrupt[1] != -1) {  idx = keyInterrupt[1]; keyInterrupt[1] = -1; }
                     System.out.println(timeCounter[idx]);
                     openkey2(timeCounter[idx],idx);
                     if (key4Open && mid3_R.isVisible()){
@@ -556,9 +549,9 @@ public class Scene6 extends Scene implements GetDetectName{
                 //@override
                 public void actionPerformed(ActionEvent e) {
                     int idx =keytimer[3];
-                    if(key4Done) return;
-                    if(!key4Open) { key4Interrupt = idx;  t[idx].stop(); return; }
-                    if(key4Interrupt != -1) {  idx = key4Interrupt; key4Interrupt = -1; }
+                    if(key4Done) t[idx].stop();
+                    if(!key4Open) { keyInterrupt[3] = idx;  t[idx].stop();  }
+                    if(keyInterrupt[3] != -1) {  idx = keyInterrupt[3]; keyInterrupt[3] = -1; }
                     openkey4(timeCounter[idx],idx,4);
                     timeCounter[idx]++;
                 }
@@ -689,6 +682,17 @@ public class Scene6 extends Scene implements GetDetectName{
         if (idx == timeCounter.length-1) idx = 0;
         else idx+=1; 
         return idx;
+    }
+    public void closeAllTimer(){
+        for(int i =0;i<t.length;i++)
+            if(t[i]!=null)
+                t[i].stop();
+    }
+    public void setHPBar(){
+        GameManager.setGoblinBar(enemyHPBar);
+        GameManager.setPlayerBar(playerHPBar);
+        enemyHPBar.setValue(100);
+        playerHPBar.setValue(100);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

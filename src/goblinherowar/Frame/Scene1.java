@@ -28,18 +28,18 @@ public class Scene1 extends Scene implements GetDetectName{
     private boolean key1Open = false;
     private boolean key2Open = false;
     private boolean key3Open = false;
-    private Timer[] t = new Timer[10];
-    private int[] timeCounter = new int[10];
+    private Timer[] t = new Timer[3];
+    private int[] timeCounter = new int[3];
     private int idx = 0;
-    private int key1Interrupt,key2Interrupt,key3Interrupt;
+    private int[] keyInterrupt = new int[3];
+    private int[] keytimer =new int[3];
     //</editor-fold>
    
     public Scene1() {
         initComponents();
        
         resetScene();
-        GameManager.setGoblinBar(s1EnemyHPBar);
-        GameManager.setPlayerBar(s1PlayerHPBar);
+
     } 
 
     
@@ -89,7 +89,10 @@ public class Scene1 extends Scene implements GetDetectName{
         
         key1cnt = key2cnt = key3cnt = 0;
         key1Open = key2Open = key3Open = false;
-        key1Interrupt = key2Interrupt = key3Interrupt = -1;
+        for (int i =0;i<keytimer.length;i++)
+            keytimer[i]  = -1;
+        for (int i =0;i<keyInterrupt.length;i++)
+            keyInterrupt[i]  = -1;
         
         s1EnemyHPBar.setForeground(Color.red);
         s1EnemyHPBar.setValue(GameManager.goblinHP);
@@ -239,11 +242,12 @@ public class Scene1 extends Scene implements GetDetectName{
     private void s1SettingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s1SettingActionPerformed
         // TODO add your handling code here:
         GameManager.pauseGame();
-        MainFrame.addScene(11,0);
-        MainFrame.setSceneVisible(11,true);
+        MainFrame.addScene(9,0);
+        MainFrame.setSceneVisible(9,true);
         s1Key1.setEnabled(false);
         s1Key2.setEnabled(false);
         s1Key3.setEnabled(false);
+        Pause.pause(t, keyInterrupt, keytimer);
     }//GEN-LAST:event_s1SettingActionPerformed
     //</editor-fold> 
     
@@ -256,13 +260,14 @@ public class Scene1 extends Scene implements GetDetectName{
         // <editor-fold defaultstate="collapsed" desc="open key"> 
         if(key1cnt%2 == 1){
             Util.moveButton(s1Key1, 320, 190);
-            recheckTimerIdx();
-            timeCounter[idx] =0;
-            t[idx]= new Timer(1000,new ActionListener(){
+            keytimer[0] = recheckTimerIdx();
+            timeCounter[keytimer[0]] =0;
+            t[keytimer[0]]= new Timer(1000,new ActionListener(){
             //@override
             public void actionPerformed(ActionEvent e) {
-                if(!key1Open) { key1Interrupt = idx;  t[idx].stop(); return; }
-               if(key1Interrupt != -1) {  idx = key1Interrupt; key1Interrupt = -1; }
+                int idx = keytimer[0];
+                if(!key1Open) { keyInterrupt[0] = idx;  t[idx].stop(); return; }
+               if(keyInterrupt[0] != -1) {  idx = keyInterrupt[0]; keyInterrupt[0] = -1; }
                 if(timeCounter[idx]<=3) key1OpenPerformed(timeCounter[idx],idx);
                 else if(timeCounter[idx] > 3){
                     if (key2Open) { s1_EnemyDetect.setVisible(true); GameManager.goblinDamaged();}
@@ -359,9 +364,24 @@ public class Scene1 extends Scene implements GetDetectName{
     //</editor-fold>
    
     
-    private void recheckTimerIdx(){
+    private int recheckTimerIdx(){
         if (idx == timeCounter.length-1) idx = 0;
         else idx+=1;
+        return idx;
+    }
+    public void closeAllTimer(){
+        for(int i =0;i<t.length;i++){
+            if(t[i]!=null){
+                t[i].stop();
+                System.out.println("stop timer");
+            }
+        }
+    }
+    public void setHPBar(){
+        GameManager.setGoblinBar(s1EnemyHPBar);
+        GameManager.setPlayerBar(s1PlayerHPBar);
+        s1EnemyHPBar.setValue(100);
+        s1PlayerHPBar.setValue(100);
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Variable">    

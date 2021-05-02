@@ -10,6 +10,7 @@ import goblinherowar.API.SceneManager;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.Timer;
 
 /**
  *
@@ -17,6 +18,9 @@ import javax.swing.JButton;
  */
 public class Pause extends Scene {
 
+    private static int[] mark = new int[10];
+    private static Timer[] tim;
+    private static Timer cnt;
     /**
      * Creates new form Pause
      */
@@ -101,7 +105,7 @@ public class Pause extends Scene {
 
     private void retryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retryActionPerformed
         // TODO add your handling code here:
-        MainFrame.setSceneVisible(11,false);
+        MainFrame.setSceneVisible(9,false);
         MainFrame.midResetScene();
     }//GEN-LAST:event_retryActionPerformed
 
@@ -110,17 +114,49 @@ public class Pause extends Scene {
         GameManager.resumeGame();
         MainFrame.setSceneVisible(11,false);
         MainFrame.setKeyButtonEnabled(true);
-        MainFrame.addScene(SceneManager.currentIdx,0);
+        for(int i = 0;i<mark.length;i++){
+            if(mark[i] == -1) continue;
+            tim[mark[i]].start();
+        }
+        if(cnt != null) cnt.start();
+       // MainFrame.addScene(SceneManager.currentIdx,0);
     }//GEN-LAST:event_resumeActionPerformed
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
-        MainFrame.setSceneVisible(11,false);
+        MainFrame.setSceneVisible(9,false);
         MainFrame.setSceneVisible(SceneManager.currentIdx, false);
         MainFrame.midResetScene();
         MainFrame.setSceneVisible(0,true);
+        GameManager.exitGame();
     }//GEN-LAST:event_exitActionPerformed
-
+    
+    public static void pause(Timer[] t,int[] keyInterrupt,int[] keyTimer){
+        tim = t;
+        for(int i = 0;i<mark.length;i++) {
+            mark[i] = -1;
+        }
+        for (int i =0;i<keyInterrupt.length;i++){
+            if(keyTimer[i] == -1) continue;
+            t[keyTimer[i]].stop();
+            keyInterrupt[i] = keyTimer[i];
+            mark[i] = keyTimer[i];
+        }
+    }
+    public static void pause(Timer[] t,int[] keyInterrupt,int[] keyTimer,Timer cntDown){
+        cnt = cntDown;
+        cnt.stop();
+        tim = t;
+        for(int i = 0;i<mark.length;i++) {
+            mark[i] = -1;
+        }
+        for (int i =0;i<keyInterrupt.length;i++){
+            if(keyTimer[i] == -1) continue;
+            t[keyTimer[i]].stop();
+            keyInterrupt[i] = keyTimer[i];
+            mark[i] = keyTimer[i];
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton exit;

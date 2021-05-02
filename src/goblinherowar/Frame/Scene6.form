@@ -318,14 +318,14 @@
     <Component class="javax.swing.JProgressBar" name="enemyHPBar">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="150" y="498" width="120" height="20"/>
+          <AbsoluteConstraints x="140" y="496" width="130" height="22"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JProgressBar" name="playerHPBar">
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="720" y="497" width="120" height="20"/>
+          <AbsoluteConstraints x="707" y="496" width="130" height="22"/>
         </Constraint>
       </Constraints>
     </Component>

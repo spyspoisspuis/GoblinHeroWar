@@ -21,7 +21,7 @@ public class Scene7 extends Scene implements GetDetectName{
 
     // <editor-fold defaultstate="collapsed" desc="instance variable"> 
     private int key1cnt,key2cnt,key3cnt,key4cnt,key5cnt,key6cnt;
-    private int key1Interrupt,key2Interrupt,key3Interrupt,key4Interrupt;
+    private int[] keyInterrupt = new int[6];
     private boolean key1Onprogress,key2Onprogress,key3Onprogress,key4Onprogress,key5Onprogress,key6Onprogress;
     private boolean key1Open,key2Open,key3Open,key4Open,key5Open,key6Open;
     private boolean key1Done,key2Done,key3Done,key4Done;
@@ -38,9 +38,6 @@ public class Scene7 extends Scene implements GetDetectName{
     public Scene7() {
         initComponents();
         
-        
-        GameManager.setGoblinBar(enemyHPBar);
-        GameManager.setPlayerBar(playerHPBar);
         k1 = new JButton();
         k1.setLocation(key1.getX(), key1.getY());
         k2 = new JButton();
@@ -132,7 +129,6 @@ public class Scene7 extends Scene implements GetDetectName{
         Util.moveButton(key6,k6.getX(),k6.getY());
         
         key1cnt = key2cnt = key3cnt = key4cnt = key5cnt = key6cnt = 0;
-        key1Interrupt = key2Interrupt = key3Interrupt = key4Interrupt  = -1;
         key1Open = key2Open = key3Open = key4Open = key5Open = key6Open = false;
         key1Onprogress = key2Onprogress = key3Onprogress = key4Onprogress = key5Onprogress = key6Onprogress = false;
         key1Done = key2Done = key3Done = key4Done = false;
@@ -141,6 +137,10 @@ public class Scene7 extends Scene implements GetDetectName{
         playerHPBar.setForeground(Color.red);
         playerHPBar.setValue(GameManager.heroHP);
         
+        for (int i =0;i<keytimer.length;i++)
+            keytimer[i]  = -1;
+        for (int i =0;i<keyInterrupt.length;i++)
+            keyInterrupt[i]  = -1;
     }
 //</editor-fold>
 
@@ -352,14 +352,15 @@ public class Scene7 extends Scene implements GetDetectName{
     private void settingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingActionPerformed
         // TODO add your handling code here:
         GameManager.pauseGame();
-        MainFrame.addScene(11,0);
-        MainFrame.setSceneVisible(11,true);
+        MainFrame.addScene(9,0);
+        MainFrame.setSceneVisible(9,true);
         key1.setEnabled(false);
         key2.setEnabled(false);
         key3.setEnabled(false);
         key4.setEnabled(false);
         key5.setEnabled(false);
         key6.setEnabled(false);
+        Pause.pause(t, keyInterrupt, keytimer);
     }//GEN-LAST:event_settingActionPerformed
 
     private void key1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_key1ActionPerformed
@@ -378,9 +379,9 @@ public class Scene7 extends Scene implements GetDetectName{
             //@override
             public void actionPerformed(ActionEvent e) {
                 int idx = keytimer[0];
-                    if(key1Done) return;
-                    if(!key1Open) {  key1Onprogress = false; key1Interrupt = idx;  t[idx].stop(); return; }   
-                    if(key1Interrupt != -1) {  idx = key1Interrupt; key1Interrupt = -1;  }
+                    if(key1Done) t[idx].stop();
+                    if(!key1Open) {  key1Onprogress = false; keyInterrupt[0] = idx;  t[idx].stop(); }   
+                    if(keyInterrupt[0] != -1) {  idx = keyInterrupt[0]; keyInterrupt[0] = -1;  }
    
                     openkey1(timeCounter[idx],idx);
                     if(key3Open && mid1_L.isVisible()){
@@ -449,8 +450,9 @@ public class Scene7 extends Scene implements GetDetectName{
                 //@override
                 public void actionPerformed(ActionEvent e) { 
                     int idx = keytimer[2];
-                    if(!key3Open) { key3Onprogress = false; key3Interrupt = idx;  t[idx].stop(); return; }
-                    if(key3Interrupt != -1) {  idx = key3Interrupt; key3Interrupt = -1; }
+                    if(key3Done) t[idx].stop();
+                    if(!key3Open) { key3Onprogress = false; keyInterrupt[2] = idx;  t[idx].stop();  }
+                    if(keyInterrupt[2] != -1) {  idx = keyInterrupt[2]; keyInterrupt[2] = -1; }
                     openkey3(timeCounter[idx],idx,3);
                     timeCounter[idx]++;
                 }
@@ -466,7 +468,6 @@ public class Scene7 extends Scene implements GetDetectName{
         //</editor-fold>
     }//GEN-LAST:event_key3ActionPerformed
     private void openkey3(int t, int idx,int key){
-        System.out.println(t);
         if(t == 0) {
             bottom1_L.setVisible(true);
             if (!key1Onprogress && mid4_L.isVisible()&& !key2Onprogress && !key2Done) 
@@ -528,9 +529,9 @@ public class Scene7 extends Scene implements GetDetectName{
                 //@override
                 public void actionPerformed(ActionEvent e) { 
                     int idx = keytimer[1];
-                    if(key2Done) return;
-                    if(!key2Open) { key2Onprogress = false; key2Interrupt = idx;  t[idx].stop(); return; }
-                    if(key2Interrupt != -1) {  idx = key2Interrupt; key2Interrupt = -1; }
+                    if(key2Done) t[idx].stop();
+                    if(!key2Open) { key2Onprogress = false; keyInterrupt[1] = idx;  t[idx].stop();  }
+                    if(keyInterrupt[1]  != -1) {  idx = keyInterrupt[1] ; keyInterrupt[1]  = -1; }
                     openkey2(timeCounter[idx],idx);
                     timeCounter[idx]++;
                 }
@@ -618,9 +619,9 @@ public class Scene7 extends Scene implements GetDetectName{
                 //@override
                 public void actionPerformed(ActionEvent e) { 
                     int idx = keytimer[3];
-                    if(key4Done) return;
-                    if(!key4Open) { key4Onprogress = false; key4Interrupt = idx;  t[idx].stop(); return; }
-                    if(key4Interrupt != -1) {  idx = key4Interrupt; key4Interrupt = -1; }
+                    if(key4Done) t[idx].stop();
+                    if(!key4Open) { key4Onprogress = false; keyInterrupt[3]  = idx;  t[idx].stop();  }
+                    if(keyInterrupt[3] != -1) {  idx = keyInterrupt[3]; keyInterrupt[3] = -1; }
                     openkey4(timeCounter[idx],idx);
                     timeCounter[idx] ++;
                 }
@@ -733,6 +734,17 @@ public class Scene7 extends Scene implements GetDetectName{
         if (idx == timeCounter.length-1) idx = 0;
         else idx+=1;
         return idx;
+    }
+    public void closeAllTimer(){
+        for(int i =0;i<t.length;i++)
+            if(t[i]!=null)
+                t[i].stop();
+    }
+    public void setHPBar(){
+        GameManager.setGoblinBar(enemyHPBar);
+        GameManager.setPlayerBar(playerHPBar);
+        enemyHPBar.setValue(100);
+        playerHPBar.setValue(100);
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

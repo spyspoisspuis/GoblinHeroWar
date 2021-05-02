@@ -3,11 +3,12 @@ import javax.swing.JProgressBar;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
+
 public class DamageTimer {
     private String name;
     private JProgressBar bar;
     private int mxtime,damageRecieve,hp;
-    
+    private boolean stop = false;
     private Timer t;
     
     public DamageTimer(int hp,JProgressBar bar,int damageRecieve,String name){
@@ -25,10 +26,11 @@ public class DamageTimer {
                         hp -= damageRecieve;
                 else hp = 0;
                 bar.setValue(hp);
-                if(hp <= 0){ GameManager.endGame(name); t.stop(); return; }
+                if(hp <= 0){ GameManager.endGame(name); t.stop(); }
            }
         });
         t.start();
+
     }
     public void stopTimer(){
         t.stop();

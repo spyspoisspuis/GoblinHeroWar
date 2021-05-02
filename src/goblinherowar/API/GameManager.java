@@ -18,15 +18,16 @@ public class GameManager {
     public static void setGoblinBar(JProgressBar bar) { goblinBar = bar; }
     
     public static void playerDamaged(){
-        damageMultiplier = (int)setCalculateHeroDamageDuetoSceneCnt();
-        DamageTimer dmt = new DamageTimer(heroBar.getValue(),heroBar,15*damageMultiplier,"Hero");
+        damageMultiplier = (int)(15*setCalculateHeroDamageDuetoSceneCnt());
+        DamageTimer dmt = new DamageTimer(heroBar.getValue(),heroBar,damageMultiplier,"Hero");
         dmtArr[0] = dmt;
         heroDetect = true;
         dmt.runTimer();
     }
     public static void goblinDamaged(){
-        damageMultiplier = (int)setCalculateGoblinDamageDuetoSceneCnt();
-        DamageTimer dmt = new DamageTimer(goblinBar.getValue(),goblinBar,30*damageMultiplier,"Goblin");
+        damageMultiplier = (int)(30*setCalculateGoblinDamageDuetoSceneCnt());
+        DamageTimer dmt = new DamageTimer(goblinBar.getValue(),goblinBar,damageMultiplier,"Goblin");
+   
         dmtArr[1] = dmt;
         goblinDetect = true;
         dmt.runTimer();
@@ -43,25 +44,27 @@ public class GameManager {
     }
     
     private static double setCalculateHeroDamageDuetoSceneCnt(){
-        if(cntScene<2) //15
+        int c = cntScene%8;
+        if(c<2) //15
             return 1;
-        else if (cntScene < 4) //20
+        else if (c == 2 || c == 4 || c == 5) //20
             return 1.34;
-        else if (cntScene == 4)//25
+        else if (c == 3 || c == 6 )//25
             return 1.67;
-        else if (cntScene == 5)//30
+        else if (c == 7)//30
             return 2;
         return 1;
         
     }
     private static double setCalculateGoblinDamageDuetoSceneCnt(){
-        if(cntScene<2) //30
+        int c = cntScene%8;
+        if(c<2) //30
             return 1;
-        else if (cntScene < 4)//20
+        else if (c == 2 || c == 4 || c == 5) //20
             return 0.67;
-        else if (cntScene == 4)//15
+        else if (c == 3 || c == 6 )//15
             return 0.5;
-        else if (cntScene == 5)//10
+        else if (c == 7)//10
             return 0.33;
         return 1;
         
@@ -80,6 +83,7 @@ public class GameManager {
             else if("3 Stars".equals(calculateScore())) result = "3 Stars";
             MainFrame.endWinScene();
         }
+        heroHP = goblinHP = 100;
     }
     
     private static String calculateScore(){
@@ -97,6 +101,10 @@ public class GameManager {
         pause = false;
         if(heroDetect) playerDamaged();
         if(goblinDetect) goblinDamaged();
+    }
+    public static void exitGame(){
+        cntScene = 0;
+        SceneManager.resetSc();
     }
 }
 

@@ -67,11 +67,11 @@ public class Home extends Scene{
 
     private void homeStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_homeStartActionPerformed
         // TODO add your handling code here:
-        MainFrame.setSceneVisible(0, false);
-        MainFrame.addScene(1,0);
-        MainFrame.setSceneVisible(1, true);
-        MainFrame.setKeyButtonEnabled(true);
-        MainFrame.setTransparent(1);
+        MainFrame.setSceneVisible(0, false); 
+        MainFrame.addScene(1,0); //1
+        MainFrame.setSceneVisible(1, true); //1
+        MainFrame.setKeyButtonEnabled(true); 
+        MainFrame.setTransparent(1); 
     }//GEN-LAST:event_homeStartActionPerformed
 
 

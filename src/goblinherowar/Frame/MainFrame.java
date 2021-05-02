@@ -40,6 +40,11 @@ public class MainFrame extends javax.swing.JFrame{
     }
     public static void addScene(int index,int position){
         j.add(scene.get(index), position);
+        if (scene.get(index) instanceof Scene8) {
+           Scene8 s = (Scene8) scene.get(index);
+            s.timerCountDown();
+        }
+        scene.get(index).setHPBar();
     }
     
     public static String[] getHeroDetect(){
@@ -55,13 +60,13 @@ public class MainFrame extends javax.swing.JFrame{
     }
     
     public static void setKeyButtonEnabled(boolean set){
-        for(int i=0;i<buttonScene.get(SceneManager.currentIdx).size();i++){
+        for(int i=0;i<buttonScene.get(SceneManager.currentIdx).size();i++){ //currentIDx
             buttonScene.get(SceneManager.currentIdx).get(i).setEnabled(set);
         }
     }
     
     public static void setKeyButtonVisible(boolean set){
-        for(int i=0;i<buttonScene.get(SceneManager.currentIdx).size();i++){
+        for(int i=0;i<buttonScene.get(SceneManager.currentIdx).size();i++){ //currentIDx
             buttonScene.get(SceneManager.currentIdx).get(i).setVisible(set);
         }
     }
@@ -71,40 +76,36 @@ public class MainFrame extends javax.swing.JFrame{
     }
     
     public static void midResetScene(){
-        switch(SceneManager.currentIdx){
-            case 1:
-                scene.get(1).resetScene();
-            case 2:
-                scene.get(2).resetScene();
-            case 3:
-                scene.get(3).resetScene();
-            case 4:
-                scene.get(4).resetScene();
-            case 5:
-                scene.get(5).resetScene();
-            case 6:
-                scene.get(6).resetScene();
-            case 7:
-                scene.get(7).resetScene();
-            case 10:
-                scene.get(10).resetScene();
-            default:    break;
-        }
+
+        scene.get(SceneManager.currentIdx).resetScene();
+        scene.get(SceneManager.currentIdx).closeAllTimer();
     }
     
     public static void endWinScene(){
-        addScene(12, 0);
-        setSceneVisible(12, true);
+        if(scene.get(SceneManager.currentIdx) instanceof Scene8) {
+            Scene8 s = (Scene8) scene.get(SceneManager.currentIdx);
+            s.stoptimerCountDown();
+        }
+        addScene(10, 0);
+        setSceneVisible(10, true);
         setKeyButtonEnabled(false);
         setKeyButtonVisible(false);
-        scene.get(12).getWinScene(GameManager.result);
+        scene.get(SceneManager.currentIdx).closeAllTimer();
+        scene.get(10).getWinScene(GameManager.result);
+        GameManager.heroHP = GameManager.goblinHP = 100;
     }
     public static void endLoseScene(){
-        addScene(12, 0);
-        setSceneVisible(12, true);
+        if(scene.get(SceneManager.currentIdx) instanceof Scene8) {
+            Scene8 s = (Scene8) scene.get(SceneManager.currentIdx);
+            s.stoptimerCountDown();
+        }
+        addScene(10, 0);
+        setSceneVisible(10, true);
         setKeyButtonEnabled(false);
         setKeyButtonVisible(false);
-        scene.get(12).getLoseScene();
+        scene.get(SceneManager.currentIdx).closeAllTimer();
+        scene.get(10).getLoseScene();
+        GameManager.heroHP = GameManager.goblinHP = 100;
     }
     
     public static void setTransparent(int s){
@@ -179,8 +180,6 @@ public class MainFrame extends javax.swing.JFrame{
         Scene6 s6 = new Scene6();
         Scene7 s7 = new Scene7();
         Scene8 s8 = new Scene8();
-        Scene9 s9 = new Scene9();
-        Scene10 s10 = new Scene10();
         Pause pause = new Pause();
         Result result = new Result();
         //</editor-fold>
@@ -195,31 +194,27 @@ public class MainFrame extends javax.swing.JFrame{
         scene.add(s6);
         scene.add(s7);
         scene.add(s8);
-        scene.add(s9);
-        scene.add(s10);
         scene.add(pause);
         scene.add(result);
         
         
-        heroDetect[1]=s1.getPlayerDetectName();
+       /* heroDetect[1]=s1.getPlayerDetectName();
         heroDetect[2]=s2.getPlayerDetectName();
         heroDetect[3]=s3.getPlayerDetectName();
         heroDetect[4]=s4.getPlayerDetectName();
         heroDetect[5]=s5.getPlayerDetectName();
         heroDetect[6]=s6.getPlayerDetectName();
         heroDetect[7]=s7.getPlayerDetectName();
-        /*
         heroDetect[10]=s10.getPlayerDetectName();
         */
         
-        goblinDetect[1]=s1.getEnemyDetectName();
+       /* goblinDetect[1]=s1.getEnemyDetectName();
         goblinDetect[2]=s2.getEnemyDetectName();
         goblinDetect[3]=s3.getEnemyDetectName();
         goblinDetect[4]=s4.getEnemyDetectName();
         goblinDetect[5]=s5.getEnemyDetectName();
         goblinDetect[6]=s6.getEnemyDetectName();
         goblinDetect[7]=s7.getEnemyDetectName();
-        /*
         goblinDetect[10]=s10.getEnemyDetectName();
         */
         
@@ -231,9 +226,8 @@ public class MainFrame extends javax.swing.JFrame{
         buttonScene.add(s5.getButton());
         buttonScene.add(s6.getButton());
         buttonScene.add(s7.getButton());
-        /*
-        buttonScene.add(s10.getButton());
-        */
+        buttonScene.add(s8.getButton());
+        
         //</editor-fold>
         
         j.setSize(960, 560);

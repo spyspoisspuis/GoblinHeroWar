@@ -13,12 +13,12 @@ import javax.swing.Timer;
 public class Scene5 extends Scene implements GetDetectName{
 
     private int key1cnt,key2cnt,key3cnt,key4cnt,key5cnt,key6cnt;
-    private int key1Interrupt,key2Interrupt,key4Interrupt,key5Interrupt;
+    private int[] keyInterrupt = new int[6];
     private boolean key1Onprogress,key2Onprogress,key5Onprogress,key4Onprogress;
     private boolean key1Open,key2Open,key3Open,key4Open,key5Open,key6Open;
     private boolean key1Done,key2Done,key5Done,key4Done;
-    private Timer[] t = new Timer[10];
-    private int[] timeCounter = new int[10];
+    private Timer[] t = new Timer[6];
+    private int[] timeCounter = new int[6];
     private int[] keytimer =new int[6];
     private int idx = 0;
     private JButton k1,k2,k3,k4,k5,k6;
@@ -26,8 +26,6 @@ public class Scene5 extends Scene implements GetDetectName{
     
     public Scene5() {
         initComponents();
-        GameManager.setGoblinBar(enemyHPBar);
-        GameManager.setPlayerBar(playerHPBar);
         k1 = new JButton();
         k1.setLocation(key1.getX(), key1.getY());
         k2 = new JButton();
@@ -119,7 +117,6 @@ public class Scene5 extends Scene implements GetDetectName{
         Util.moveButton(key6,k6.getX(),k6.getY());
         
         key1cnt = key2cnt = key3cnt = key4cnt = key5cnt = key6cnt = 0;
-        key1Interrupt = key2Interrupt = key5Interrupt = key4Interrupt  = -1;
         key1Open = key2Open = key3Open = key4Open = key5Open = key6Open = false;
         key1Onprogress = key2Onprogress = key5Onprogress = key4Onprogress = false;
         key1Done = key2Done = key5Done = key4Done = false;
@@ -129,7 +126,11 @@ public class Scene5 extends Scene implements GetDetectName{
         playerHPBar.setForeground(Color.red);
         playerHPBar.setValue(GameManager.heroHP);
 
-    }
+        for (int i =0;i<keytimer.length;i++)
+            keytimer[i]  = -1;
+        for (int i =0;i<keyInterrupt.length;i++)
+            keyInterrupt[i]  = -1;
+        }
 //</editor-fold>
 
     /**
@@ -327,9 +328,9 @@ public class Scene5 extends Scene implements GetDetectName{
         add(setting);
         setting.setBounds(880, 10, 57, 70);
         add(enemyHPBar);
-        enemyHPBar.setBounds(165, 498, 120, 20);
+        enemyHPBar.setBounds(166, 496, 130, 22);
         add(playerHPBar);
-        playerHPBar.setBounds(720, 497, 120, 20);
+        playerHPBar.setBounds(707, 496, 130, 22);
 
         Scene5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/goblinherowar/Frame/Component/scene5Component/Scene5.jpg"))); // NOI18N
         Scene5.setSize(new java.awt.Dimension(960, 540));
@@ -340,14 +341,15 @@ public class Scene5 extends Scene implements GetDetectName{
     private void settingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_settingActionPerformed
         // TODO add your handling code here:
         GameManager.pauseGame();
-        MainFrame.addScene(11,0);
-        MainFrame.setSceneVisible(11,true);
+        MainFrame.addScene(9,0);
+        MainFrame.setSceneVisible(9,true);
         key1.setEnabled(false);
         key2.setEnabled(false);
         key3.setEnabled(false);
         key4.setEnabled(false);
         key5.setEnabled(false);
         key6.setEnabled(false);
+        Pause.pause(t, keyInterrupt, keytimer);
     }//GEN-LAST:event_settingActionPerformed
 
     private void key1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_key1ActionPerformed
@@ -368,9 +370,9 @@ public class Scene5 extends Scene implements GetDetectName{
                 public void actionPerformed(ActionEvent e) {
                     int idx = keytimer[0];
                     
-                    if(key1Done) return;
-                    if(!key1Open) { key1Onprogress =false; key1Interrupt = idx;  t[idx].stop(); return; }
-                    if(key1Interrupt != -1) {  idx = key1Interrupt; key1Interrupt = -1; }
+                    if(key1Done) t[idx].stop();
+                    if(!key1Open) { key1Onprogress =false; keyInterrupt[0] = idx;  t[idx].stop();  }
+                    if(keyInterrupt[0] != -1) {  idx = keyInterrupt[0]; keyInterrupt[0]= -1; }
                     if(timeCounter[idx]<4) {
                         openkey1(timeCounter[idx],idx);
                     }
@@ -434,10 +436,9 @@ public class Scene5 extends Scene implements GetDetectName{
                 //@override
                 public void actionPerformed(ActionEvent e) {
                     int idx = keytimer[3];
-                    
-                    if(key4Done) return;
-                    if(!key4Open) { key4Onprogress = false; key4Interrupt = idx;  t[idx].stop(); return; }
-                    if(key4Interrupt != -1) {  idx = key4Interrupt; key4Interrupt = -1; }
+                    if(key4Done) t[idx].stop();
+                    if(!key4Open) { key4Onprogress = false; keyInterrupt[3] = idx;  t[idx].stop(); }
+                    if(keyInterrupt[3] != -1) {  idx = keyInterrupt[3]; keyInterrupt[3] = -1; }
                     openkey4(timeCounter[idx],idx,4);
                     timeCounter[idx]++;
                 }
@@ -460,17 +461,17 @@ public class Scene5 extends Scene implements GetDetectName{
         }
         if (t == 0){
             bottom_M.setVisible(true);
-            if(key == 1) mid1_L.setVisible(false);
+            /*if(key == 1) mid1_L.setVisible(false);
             else if (key==4){
                 if(mid1_L.isVisible())
                     mid1_L.setVisible(false);
                 else mid1_R.setVisible(false);
             }
-            else if(key==2) mid1_R.setVisible(false);
+            else if(key==2) mid1_R.setVisible(false);*/
         }
         else if (t == 1){
             bottom_L.setVisible(true);
-            if (key == 2) 
+            /*if (key == 2) 
                 top4_R.setVisible(false);
             else if(key==1) {
                 mid2_L.setVisible(false);
@@ -480,11 +481,11 @@ public class Scene5 extends Scene implements GetDetectName{
                 if(top4_R.isVisible())
                     top4_R.setVisible(false);
                 else mid2_L.setVisible(false);
-            }
+            }*/
         }
         else  if (t == 2){
             bottom1_R.setVisible(true);
-            if (key == 2) {
+            /*if (key == 2) {
                 mid2_R.setVisible(false);
             }
             else if(key==1) {
@@ -494,13 +495,13 @@ public class Scene5 extends Scene implements GetDetectName{
                 if(mid2_R.isVisible())
                     mid2_R.setVisible(false);
                 else mid3_L.setVisible(false);
-            }
+            }*/
 
         }
         
         else  if (t == 3){
             bottom2_R.setVisible(true);
-            mid1_M.setVisible(false);
+            //mid1_M.setVisible(false);
             if(key3Open)
             {
                 enemyDamage(); 
@@ -515,6 +516,7 @@ public class Scene5 extends Scene implements GetDetectName{
             else if(key==2) endkey2(idx); 
             else if (key ==4) endkey4(idx);   
         }
+        checktop(t);
     }
     private void endkey4(int idx){
         key4Onprogress = false;
@@ -541,9 +543,9 @@ public class Scene5 extends Scene implements GetDetectName{
                 public void actionPerformed(ActionEvent e) {
                     int idx =keytimer[1];
           
-                    if(key2Done) return;
-                    if (!key2Open) { key2Onprogress =false; key2Interrupt = idx; t[idx].stop();return;}
-                    if (key2Interrupt != -1) {idx = key2Interrupt; key2Interrupt = -1;}
+                    if(key2Done) t[idx].stop();
+                    if (!key2Open) { key2Onprogress =false; keyInterrupt[1]= idx; t[idx].stop();return;}
+                    if (keyInterrupt[1] != -1) {idx = keyInterrupt[1]; keyInterrupt[1] = -1;}
                     openkey2(timeCounter[idx],idx);
                     if(key5Open && mid1_R.isVisible()){
                         int k = timeCounter[idx]-2+getkey5sequence();
@@ -639,9 +641,9 @@ public class Scene5 extends Scene implements GetDetectName{
                 //@override
                 public void actionPerformed(ActionEvent e) {
                     int idx = keytimer[4];
-                    if(key5Done) return;
-                    if(!key5Open) { key5Interrupt = idx;  t[idx].stop(); return; }
-                    if(key5Interrupt != -1) {  idx = key5Interrupt; key5Interrupt = -1; }
+                    if(key5Done) t[idx].stop();;
+                    if(!key5Open) { keyInterrupt[4] = idx;  t[idx].stop(); }
+                    if(keyInterrupt[4] != -1) {  idx = keyInterrupt[4]; keyInterrupt[4] = -1; }
                     
                     openkey5(timeCounter[idx],idx,5);
                     timeCounter[idx]++;
@@ -739,7 +741,43 @@ public class Scene5 extends Scene implements GetDetectName{
             else if(mid1_R.isVisible()) mid1_R.setVisible(false);
         }
     }
-    
+    private void checktop(int t){
+        if(t==0){
+            if(mid1_L.isVisible()) mid1_L.setVisible(false);
+            else if(mid1_R.isVisible()) mid1_R.setVisible(false);
+            else if(mid2_L.isVisible()) mid2_L.setVisible(false);
+            else if(top4_R.isVisible()) top4_R.setVisible(false);
+            else if(mid2_R.isVisible()) mid2_R.setVisible(false);
+            else if(mid3_L.isVisible()) mid3_L.setVisible(false);
+            else if(mid3_R.isVisible()) mid3_R.setVisible(false);
+        }
+        else  if(t==1){
+            if(mid1_R.isVisible()) mid1_R.setVisible(false);
+            else if(mid2_L.isVisible()) mid2_L.setVisible(false);
+            else if(top4_R.isVisible()) top4_R.setVisible(false);
+            else if(mid2_R.isVisible()) mid2_R.setVisible(false);
+            else if(mid3_L.isVisible()) mid3_L.setVisible(false);
+            else if(mid3_R.isVisible()) mid3_R.setVisible(false);
+        }
+        else  if(t==2){
+            if(mid2_L.isVisible()) mid2_L.setVisible(false);
+            else if(top4_R.isVisible()) top4_R.setVisible(false);
+            else if(mid2_R.isVisible()) mid2_R.setVisible(false);
+            else if(mid3_L.isVisible()) mid3_L.setVisible(false);
+            else if(mid3_R.isVisible()) mid3_R.setVisible(false);
+        }
+        else  if(t==3){
+            if(top4_R.isVisible()) top4_R.setVisible(false);
+            else if(mid2_R.isVisible()) mid2_R.setVisible(false);
+            else if(mid3_L.isVisible()) mid3_L.setVisible(false);
+            else if(mid3_R.isVisible()) mid3_R.setVisible(false);
+        }
+        else  if(t==4){
+            if(mid2_R.isVisible()) mid2_R.setVisible(false);
+            else if(mid3_L.isVisible()) mid3_L.setVisible(false);
+            else if(mid3_R.isVisible()) mid3_R.setVisible(false);
+        }
+    }
     private void enemyDamage(){
         enemyDetect.setVisible(true);
         GameManager.goblinDamaged();
@@ -761,6 +799,17 @@ public class Scene5 extends Scene implements GetDetectName{
         if (idx == timeCounter.length-1)  idx = 0; 
         else  idx+=1;
         return idx;
+    }
+    public void closeAllTimer(){
+        for(int i =0;i<t.length;i++)
+            if(t[i]!=null)
+                t[i].stop();
+    }
+    public void setHPBar(){
+        GameManager.setGoblinBar(enemyHPBar);
+        GameManager.setPlayerBar(playerHPBar);
+        enemyHPBar.setValue(100);
+        playerHPBar.setValue(100);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
