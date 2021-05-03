@@ -75,6 +75,7 @@ public class Scene8 extends Scene {
         b.add(key4);
         b.add(key5);
         b.add(key6);
+         b.add(setting);
         return b;
     }
     
@@ -630,7 +631,6 @@ public class Scene8 extends Scene {
     }//GEN-LAST:event_key6ActionPerformed
 
     public void timerCountDown(){
-        System.out.println("timer count down");
         tCount = new Timer(1000, new ActionListener() {
                 //@override
                 public void actionPerformed(ActionEvent e) {

@@ -33,6 +33,7 @@ public class Scene1 extends Scene implements GetDetectName{
     private int idx = 0;
     private int[] keyInterrupt = new int[3];
     private int[] keytimer =new int[3];
+    private boolean key1Onprogress,key2Onprogress;
     //</editor-fold>
    
     public Scene1() {
@@ -57,6 +58,7 @@ public class Scene1 extends Scene implements GetDetectName{
         b.add(s1Key1);
         b.add(s1Key2);
         b.add(s1Key3);
+        b.add(s1Setting);
         return b;
     }
     
@@ -68,9 +70,11 @@ public class Scene1 extends Scene implements GetDetectName{
         s1Key1.setEnabled(true);
         s1Key2.setEnabled(true);
         s1Key3.setEnabled(true);
+        s1Setting.setEnabled(true);
         s1Key1.setVisible(true);
         s1Key2.setVisible(true);
         s1Key3.setVisible(true);
+        s1Setting.setVisible(true);
         s1Key1.setLocation(400, 190);
         s1Key2.setLocation(250, 140);
         s1Key3.setLocation(700, 230);
@@ -89,6 +93,7 @@ public class Scene1 extends Scene implements GetDetectName{
         
         key1cnt = key2cnt = key3cnt = 0;
         key1Open = key2Open = key3Open = false;
+        key1Onprogress = key2Onprogress = false;
         for (int i =0;i<keytimer.length;i++)
             keytimer[i]  = -1;
         for (int i =0;i<keyInterrupt.length;i++)
@@ -289,7 +294,7 @@ public class Scene1 extends Scene implements GetDetectName{
         //</editor-fold> 
         
     }//GEN-LAST:event_s1Key1ActionPerformed
-    //</editor-fold>
+    
     
     private void key1OpenPerformed(int timerCounter,int idx){
         if(timerCounter == 0) {
@@ -310,6 +315,7 @@ public class Scene1 extends Scene implements GetDetectName{
             if(!key2Open && !key3Open) { t[idx].stop(); timeCounter[idx] = 0; }
         }
     }
+    //</editor-fold>
     
     // <editor-fold defaultstate="collapsed" desc="Key2 Clicked"> 
     private void s1Key2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_s1Key2ActionPerformed
@@ -373,7 +379,6 @@ public class Scene1 extends Scene implements GetDetectName{
         for(int i =0;i<t.length;i++){
             if(t[i]!=null){
                 t[i].stop();
-                //System.out.println("stop timer");
             }
         }
     }

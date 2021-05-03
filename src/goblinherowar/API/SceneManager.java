@@ -2,7 +2,7 @@ package goblinherowar.API;
 import java.util.Random;
 import goblinherowar.Frame.MainFrame;
 public class SceneManager {
-    public static int currentIdx = 1;
+    public static int currentIdx = 0;
     private static int ezarr = 0;
     private static int medarr = 0 ;
     public static int randomScene(){

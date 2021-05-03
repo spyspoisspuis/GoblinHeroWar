@@ -71,6 +71,7 @@ public class Scene7 extends Scene implements GetDetectName{
         b.add(key4);
         b.add(key5);
         b.add(key6);
+         b.add(setting);
         return b;
     }
     

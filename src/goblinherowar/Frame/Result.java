@@ -172,10 +172,12 @@ public class Result extends Scene {
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
+        
         MainFrame.setSceneVisible(10,false);
         MainFrame.setSceneVisible(SceneManager.currentIdx, false);
         MainFrame.midResetScene();
         MainFrame.setSceneVisible(0,true);
+        SceneManager.currentIdx = 0;
         GameManager.exitGame();
         resetScene();
     }//GEN-LAST:event_exitActionPerformed

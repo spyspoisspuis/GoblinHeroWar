@@ -70,15 +70,15 @@ public class MainFrame extends javax.swing.JFrame{
             buttonScene.get(SceneManager.currentIdx).get(i).setVisible(set);
         }
     }
-    
+ 
     public static void setSceneVisible(int s,boolean set){
         scene.get(s).setVisible(set);
     }
     
     public static void midResetScene(){
-
         scene.get(SceneManager.currentIdx).resetScene();
         scene.get(SceneManager.currentIdx).closeAllTimer();
+        if(scene.get(10).isDisplayable()) setSceneVisible(10,false);
     }
     
     public static void endWinScene(){

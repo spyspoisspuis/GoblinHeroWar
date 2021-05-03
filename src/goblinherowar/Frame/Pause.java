@@ -105,12 +105,15 @@ public class Pause extends Scene {
 
     private void retryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_retryActionPerformed
         // TODO add your handling code here:
+        MainFrame.setKeyButtonEnabled(true);
+
         MainFrame.setSceneVisible(9,false);
         MainFrame.midResetScene();
     }//GEN-LAST:event_retryActionPerformed
 
     private void resumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resumeActionPerformed
         // TODO add your handling code here:
+        MainFrame.setKeyButtonEnabled(true);
         GameManager.resumeGame();
         MainFrame.setSceneVisible(9,false);
         MainFrame.setKeyButtonEnabled(true);
@@ -124,16 +127,18 @@ public class Pause extends Scene {
 
     private void exitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitActionPerformed
         // TODO add your handling code here:
+        MainFrame.setKeyButtonEnabled(true); 
         MainFrame.setSceneVisible(9,false);
         MainFrame.setSceneVisible(SceneManager.currentIdx, false);
         MainFrame.midResetScene();
-        MainFrame.setKeyButtonEnabled(false);
-        MainFrame.setKeyButtonVisible(false);
         MainFrame.setSceneVisible(0,true);
+        SceneManager.currentIdx = 0;
         GameManager.exitGame();
+        
     }//GEN-LAST:event_exitActionPerformed
     
     public static void pause(Timer[] t,int[] keyInterrupt,int[] keyTimer){
+        MainFrame.setKeyButtonEnabled(false); 
         tim = t;
         for(int i = 0;i<mark.length;i++) {
             mark[i] = -1;
@@ -146,6 +151,7 @@ public class Pause extends Scene {
         }
     }
     public static void pause(Timer[] t,int[] keyInterrupt,int[] keyTimer,Timer cntDown){
+        MainFrame.setKeyButtonEnabled(false); 
         cnt = cntDown;
         cnt.stop();
         tim = t;

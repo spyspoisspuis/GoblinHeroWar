@@ -34,6 +34,7 @@ public class Scene2 extends Scene implements GetDetectName{
     private int[] keyInterrupt = new int[4];
     private int[] keytimer =new int[4];
     private JButton k1,k2,k3,k4;
+    private boolean key1Onprogress,key2Onprogress;
     //</editor-fold>
     
 
@@ -71,6 +72,7 @@ public class Scene2 extends Scene implements GetDetectName{
         b.add(key2);
         b.add(key3);
         b.add(key4);
+        b.add(setting);
         return b;
     }
     
@@ -112,7 +114,7 @@ public class Scene2 extends Scene implements GetDetectName{
         
         key1cnt = key2cnt = key3cnt = key4cnt = 0;
         key1Open = key2Open = key3Open = key4Open = false;
-        
+        key1Onprogress = key2Onprogress = false;
         enemyHPBar.setForeground(Color.red);
         enemyHPBar.setValue(GameManager.goblinHP);
         playerHPBar.setForeground(Color.red);
@@ -308,6 +310,7 @@ public class Scene2 extends Scene implements GetDetectName{
         // <editor-fold defaultstate="collapsed" desc="open key"> 
         if(key1cnt%2==1) {
             Util.moveButton(key1,key1.getX(),key1.getY()-40);
+            key1Onprogress = true;
             keytimer[0] = recheckTimerIdx();
             timeCounter[keytimer[0]] = 0;
             t[keytimer[0]] = new Timer(1000, new ActionListener() {
@@ -316,11 +319,12 @@ public class Scene2 extends Scene implements GetDetectName{
                     int idx = keytimer[0];
                     if(!key1Open) { keyInterrupt[0] = idx;  t[idx].stop(); return; }
                     if(keyInterrupt[0] != -1) {  idx = keyInterrupt[0]; keyInterrupt[0] = -1; }
-                    if(timeCounter[idx]<8) key1OpenPerformed(timeCounter[idx]);
+                    if(timeCounter[idx]<8) key1OpenPerformed(timeCounter[idx],idx);
+                    if(timeCounter[idx]>=2 && !enemyDetect.isVisible() && key3Open) enemyDamage();
                     timeCounter[idx]++;
                 }
             });
-            t[idx].start();
+            t[keytimer[0]].start();
         }
         //</editor-fold>
         // <editor-fold defaultstate="collapsed" desc="close key"> 
@@ -332,54 +336,42 @@ public class Scene2 extends Scene implements GetDetectName{
         
     }//GEN-LAST:event_key1ActionPerformed
 
-    private void key1OpenPerformed(int timerCounter){
+    private void key1OpenPerformed(int timerCounter,int idx){
         if(timerCounter == 0) {
-            t[idx].start();
             top1.setVisible(false);
             mid1_L.setVisible(true);
         }
         if(timerCounter == 1){
-            t[idx].start();
             top2.setVisible(false);
             mid2_L.setVisible(true);
         }
         if (timerCounter == 2){
-            t[idx].start();
             top3.setVisible(false);
             mid3_L.setVisible(true);
         }
         if(timerCounter == 3){
-            t[idx].start();
             top4.setVisible(false);
             bottom1_L.setVisible(true);
-            if(key3Open) { enemyDamage(); }
-            else if(!key3Open){ stopEnemyDamage(); }
+
         }
         if(timerCounter == 4){
-            t[idx].start();
             mid1_L.setVisible(false);
             bottom2_L.setVisible(true);
-            if(key3Open) { enemyDamage(); }
-            else if(!key3Open){ stopEnemyDamage(); }
+
         }
         if(timerCounter == 5){
-            t[idx].start();
             mid2_L.setVisible(false);
             bottom_M.setVisible(true);
-            if(key3Open) { enemyDamage(); }
-            else if(!key3Open){ stopEnemyDamage(); }
+
         }
         if(timerCounter == 6){
-            t[idx].start();
             bottom2_R.setVisible(true);
-            if(key3Open) { enemyDamage(); }
-            else if(!key3Open){ stopEnemyDamage(); }
+
         }
         if(timerCounter == 7){
-            t[idx].start();
             bottom1_R.setVisible(true);
             mid3_R.setVisible(true);
-            if(!key3Open || !key4Open) { t[idx].stop(); timeCounter[idx] = 0; }
+            if(!key3Open || !key4Open) { key1Onprogress = false; t[idx].stop(); timeCounter[idx] = 0; }
         }
     }
     //</editor-fold>
@@ -393,6 +385,7 @@ public class Scene2 extends Scene implements GetDetectName{
         // <editor-fold defaultstate="collapsed" desc="open key"> 
         if(key2cnt%2==1) {
             Util.moveButton(key2,key2.getX(),key2.getY()-40);
+            key2Onprogress = true;
             keytimer[1] = recheckTimerIdx();
             timeCounter[ keytimer[1]] = 0;
             t[ keytimer[1]] = new Timer(1000, new ActionListener() {
@@ -401,7 +394,8 @@ public class Scene2 extends Scene implements GetDetectName{
                     int idx = keytimer[1];
                     if(!key2Open) { keyInterrupt[1] = idx;  t[idx].stop(); return; }
                     if(keyInterrupt[1] != -1) {  idx = keyInterrupt[1]; keyInterrupt[1] = -1; }
-                    if(timeCounter[idx]<=7) key2OpenPerformed(timeCounter[idx]);
+                    if(timeCounter[idx]<=7) key2OpenPerformed(timeCounter[idx],idx);
+                    if(timeCounter[idx]>=2 && !playerDetect.isVisible() && key4Open) playerDamage();
                     timeCounter[idx]++;
                 }
             });
@@ -416,54 +410,41 @@ public class Scene2 extends Scene implements GetDetectName{
         //</editor-fold>
     }//GEN-LAST:event_key2ActionPerformed
 
-    private void key2OpenPerformed(int timerCounter){
+    private void key2OpenPerformed(int timerCounter,int idx){
         if(timerCounter == 0) {
-            t[idx].start();
             top1.setVisible(false);
             mid1_R.setVisible(true);
         }
         if(timerCounter == 1){
-            t[idx].start();
             top2.setVisible(false);
             mid2_R.setVisible(true);
         }
         if (timerCounter == 2){
-            t[idx].start();
             top3.setVisible(false);
             mid3_R.setVisible(true);
         }
         if(timerCounter == 3){
-            t[idx].start();
             top4.setVisible(false);
             bottom1_R.setVisible(true);
-            if(key4Open) { playerDamage();  }
-            else if(!key4Open){ stopPlayerDamage(); }
         }
         if(timerCounter == 4){
-            t[idx].start();
             mid1_R.setVisible(false);
             bottom2_R.setVisible(true);
-            if(key4Open) { playerDamage();  }
-            else if(!key4Open){ stopPlayerDamage(); }
+
         }
         if(timerCounter == 5){
-            t[idx].start();
             mid2_L.setVisible(false);
             bottom_M.setVisible(true);
-            if(key4Open) { playerDamage(); }
-            else if(!key4Open){ stopPlayerDamage(); }
+
         }
         if(timerCounter == 6){
-            t[idx].start();
             bottom2_L.setVisible(true);
-            if(key4Open) { playerDamage();  }
-            else if(!key4Open){ stopPlayerDamage(); }
+
         }
         if(timerCounter == 7){
-            t[idx].start();
             bottom1_L.setVisible(true);
             mid3_L.setVisible(true);
-            if(!key3Open || !key4Open) { t[idx].stop(); timeCounter[idx] = 0; }
+            if(!key3Open || !key4Open) { key2Onprogress = false;t[idx].stop(); timeCounter[idx] = 0; }
         }
     }
     //</editor-fold>
@@ -476,12 +457,14 @@ public class Scene2 extends Scene implements GetDetectName{
         key3cnt++;
         
         if(key3cnt%2 == 1) Util.moveButton(key3, key3.getX()-80, key3.getY());
-        else Util.moveButton(key3, key3.getX()+80, key3.getY());
+        else  { Util.moveButton(key3, key3.getX()+80, key3.getY()); stopEnemyDamage();}
         
         if(!key3Open && !mid3_L.isVisible()) return;
         if(!key3.isEnabled()) return;
+        if(key1Onprogress) return;
         if(mid3_L.isVisible()){ 
             if(key3cnt%2==1){
+                System.out.println("s");
                 enemyDamage();
             }
             else{
@@ -499,10 +482,11 @@ public class Scene2 extends Scene implements GetDetectName{
         key4cnt++;
         
         if(key4cnt%2 == 1) Util.moveButton(key4, key4.getX()+80, key4.getY());
-        else Util.moveButton(key4, key4.getX()-80, key4.getY());
+        else { Util.moveButton(key4, key4.getX()-80, key4.getY()); stopPlayerDamage(); }
         
         if(!key4Open && !mid3_R.isVisible()) return;
         if(!key4.isEnabled()) return;
+        if(key2Onprogress) return;
         if(mid3_R.isVisible()){ 
             if(key4cnt%2==1){
                 playerDamage();
