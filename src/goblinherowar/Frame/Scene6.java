@@ -491,7 +491,7 @@ public class Scene6 extends Scene implements GetDetectName{
                     if(key2Done) t[idx].stop();
                     if(!key2Open) { keyInterrupt[1] = idx;  t[idx].stop(); }
                     if(keyInterrupt[1] != -1) {  idx = keyInterrupt[1]; keyInterrupt[1] = -1; }
-                    System.out.println(timeCounter[idx]);
+                    //System.out.println(timeCounter[idx]);
                     openkey2(timeCounter[idx],idx);
                     if (key4Open && mid3_R.isVisible()){
                         int k  =timeCounter[idx] - 2 - getkey4sequence();

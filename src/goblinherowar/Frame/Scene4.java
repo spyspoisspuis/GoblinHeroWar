@@ -318,34 +318,36 @@ public class Scene4 extends Scene implements GetDetectName{
     }//GEN-LAST:event_key1ActionPerformed
 
     private void key1OpenPerformed(int timerCounter){
-        if(timerCounter == 0 && top3.isVisible()) {
+        if(timerCounter == 0) {
             t[idx].start();
             top1.setVisible(false);
             mid1.setVisible(true);
             
         }
-        if(timerCounter == 1 && mid1.isVisible()){
+        if(timerCounter == 1){
             t[idx].start();
             top2.setVisible(false);
             mid2.setVisible(true);
             
         }
-        if (timerCounter == 2 && mid1.isVisible()){
+        if (timerCounter == 2){
             t[idx].start();
             top3.setVisible(false);
             mid3.setVisible(true);
-            if(key2Open) {key2OpenPerformed(timerCounter);}
+            if(key2Open) {key2OpenPerformed(0);}
         }
-        if(timerCounter == 3 && mid1.isVisible()){
+        if(timerCounter == 3){
             t[idx].start();
             bottom1_R.setVisible(true);
-            if(key2Open) {key2OpenPerformed(timerCounter);}
+            if(key2Open) {key2OpenPerformed(0);}
         }
-        if(timerCounter == 4 && mid1.isVisible()){
+        if(timerCounter == 4){
             t[idx].start();
             bottom2_R.setVisible(true);
-            if(key2Open) {key2OpenPerformed(timerCounter);}
-            if(key4Open) { t[idx].stop(); }
+            if(key2Open) {key2OpenPerformed(0);}
+            if(!key4Open){
+                if(bottom2_R.isVisible()) { t[idx].stop(); timeCounter[idx] = 0; }
+            }
         }
     }
     //</editor-fold>
@@ -395,7 +397,9 @@ public class Scene4 extends Scene implements GetDetectName{
         if (timerCounter == 1 && mid3.isVisible()){
             t[idx].start();
             bottom2_L.setVisible(true);
-            if(key3Open) { t[idx].stop(); }
+            if(!key3Open) {
+                if(bottom2_L.isVisible()) { t[idx].stop(); timeCounter[idx] = 0; }
+            }
         }
     }
     //</editor-fold>

@@ -12,7 +12,7 @@ public class SceneManager {
         if (cntSc==0) randInt = 1;
         else if(cntSc==1){
             while (true){
-                randInt = rand.nextInt(2)+2;
+                randInt = rand.nextInt(3)+2;
                 if (randInt != ezarr) break;
             }
             ezarr = randInt;

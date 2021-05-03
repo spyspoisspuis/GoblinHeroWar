@@ -162,8 +162,8 @@ public class Result extends Scene {
         // TODO add your handling code here:
         MainFrame.setSceneVisible(10, false);
         MainFrame.setSceneVisible(SceneManager.currentIdx, false);
-        SceneManager.randomScene();
         MainFrame.midResetScene();  
+        SceneManager.randomScene();
         MainFrame.addScene(SceneManager.currentIdx, 0);
         MainFrame.setSceneVisible(SceneManager.currentIdx,true);
         MainFrame.setTransparent(SceneManager.currentIdx);

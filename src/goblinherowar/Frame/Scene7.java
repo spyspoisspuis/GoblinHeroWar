@@ -558,7 +558,7 @@ public class Scene7 extends Scene implements GetDetectName{
         if (t==1) bottom4_L.setVisible(true);
         else if (t==2) bottom3_L.setVisible(true);
         else if (t==3) { 
-            System.out.println("v");
+            //System.out.println("v");
             if(key5Open) enemyDamage();
             else bottom2_L.setVisible(true); 
             endkey2(idx); 

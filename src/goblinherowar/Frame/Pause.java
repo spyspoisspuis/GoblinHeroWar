@@ -112,7 +112,7 @@ public class Pause extends Scene {
     private void resumeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resumeActionPerformed
         // TODO add your handling code here:
         GameManager.resumeGame();
-        MainFrame.setSceneVisible(11,false);
+        MainFrame.setSceneVisible(9,false);
         MainFrame.setKeyButtonEnabled(true);
         for(int i = 0;i<mark.length;i++){
             if(mark[i] == -1) continue;
@@ -127,6 +127,8 @@ public class Pause extends Scene {
         MainFrame.setSceneVisible(9,false);
         MainFrame.setSceneVisible(SceneManager.currentIdx, false);
         MainFrame.midResetScene();
+        MainFrame.setKeyButtonEnabled(false);
+        MainFrame.setKeyButtonVisible(false);
         MainFrame.setSceneVisible(0,true);
         GameManager.exitGame();
     }//GEN-LAST:event_exitActionPerformed

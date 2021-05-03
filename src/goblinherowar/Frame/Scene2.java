@@ -316,7 +316,7 @@ public class Scene2 extends Scene implements GetDetectName{
                     int idx = keytimer[0];
                     if(!key1Open) { keyInterrupt[0] = idx;  t[idx].stop(); return; }
                     if(keyInterrupt[0] != -1) {  idx = keyInterrupt[0]; keyInterrupt[0] = -1; }
-                    if(timeCounter[idx]<=7) key1OpenPerformed(timeCounter[idx]);
+                    if(timeCounter[idx]<8) key1OpenPerformed(timeCounter[idx]);
                     timeCounter[idx]++;
                 }
             });
@@ -333,49 +333,53 @@ public class Scene2 extends Scene implements GetDetectName{
     }//GEN-LAST:event_key1ActionPerformed
 
     private void key1OpenPerformed(int timerCounter){
-        if(timerCounter == 0 && top4.isVisible()) {
+        if(timerCounter == 0) {
             t[idx].start();
             top1.setVisible(false);
             mid1_L.setVisible(true);
         }
-        if(timerCounter == 1 && top4.isVisible()){
+        if(timerCounter == 1){
             t[idx].start();
             top2.setVisible(false);
             mid2_L.setVisible(true);
         }
-        if (timerCounter == 2 && top4.isVisible()){
+        if (timerCounter == 2){
             t[idx].start();
             top3.setVisible(false);
             mid3_L.setVisible(true);
         }
-        if(timerCounter == 3 && top4.isVisible()){
+        if(timerCounter == 3){
             t[idx].start();
             top4.setVisible(false);
             bottom1_L.setVisible(true);
-            if(key3Open) { t[idx].stop();  }
+            if(key3Open) { enemyDamage(); }
+            else if(!key3Open){ stopEnemyDamage(); }
         }
-        if(timerCounter == 4 && mid1_L.isVisible()){
+        if(timerCounter == 4){
             t[idx].start();
             mid1_L.setVisible(false);
             bottom2_L.setVisible(true);
-            if(key3Open) { t[idx].stop();  }
+            if(key3Open) { enemyDamage(); }
+            else if(!key3Open){ stopEnemyDamage(); }
         }
-        if(timerCounter == 5 && mid2_L.isVisible()){
+        if(timerCounter == 5){
             t[idx].start();
             mid2_L.setVisible(false);
             bottom_M.setVisible(true);
-            if(key3Open) { t[idx].stop();  }
+            if(key3Open) { enemyDamage(); }
+            else if(!key3Open){ stopEnemyDamage(); }
         }
         if(timerCounter == 6){
             t[idx].start();
             bottom2_R.setVisible(true);
-            if(key3Open) { t[idx].stop();  }
+            if(key3Open) { enemyDamage(); }
+            else if(!key3Open){ stopEnemyDamage(); }
         }
         if(timerCounter == 7){
             t[idx].start();
             bottom1_R.setVisible(true);
             mid3_R.setVisible(true);
-            if(key3Open || key4Open) { t[idx].stop(); timeCounter[idx] = 0; }
+            if(!key3Open || !key4Open) { t[idx].stop(); timeCounter[idx] = 0; }
         }
     }
     //</editor-fold>
@@ -413,49 +417,53 @@ public class Scene2 extends Scene implements GetDetectName{
     }//GEN-LAST:event_key2ActionPerformed
 
     private void key2OpenPerformed(int timerCounter){
-        if(timerCounter == 0 && top4.isVisible()) {
+        if(timerCounter == 0) {
             t[idx].start();
             top1.setVisible(false);
             mid1_R.setVisible(true);
         }
-        if(timerCounter == 1 && top4.isVisible()){
+        if(timerCounter == 1){
             t[idx].start();
             top2.setVisible(false);
             mid2_R.setVisible(true);
         }
-        if (timerCounter == 2 && top4.isVisible()){
+        if (timerCounter == 2){
             t[idx].start();
             top3.setVisible(false);
             mid3_R.setVisible(true);
         }
-        if(timerCounter == 3 && top4.isVisible()){
+        if(timerCounter == 3){
             t[idx].start();
             top4.setVisible(false);
             bottom1_R.setVisible(true);
-            if(key4Open) { t[idx].stop();  }
+            if(key4Open) { playerDamage();  }
+            else if(!key4Open){ stopPlayerDamage(); }
         }
-        if(timerCounter == 4 && mid1_R.isVisible()){
+        if(timerCounter == 4){
             t[idx].start();
             mid1_R.setVisible(false);
             bottom2_R.setVisible(true);
-            if(key4Open) { t[idx].stop();  }
+            if(key4Open) { playerDamage();  }
+            else if(!key4Open){ stopPlayerDamage(); }
         }
-        if(timerCounter == 5 && mid2_R.isVisible()){
+        if(timerCounter == 5){
             t[idx].start();
             mid2_L.setVisible(false);
             bottom_M.setVisible(true);
-            if(key4Open) { t[idx].stop(); }
+            if(key4Open) { playerDamage(); }
+            else if(!key4Open){ stopPlayerDamage(); }
         }
         if(timerCounter == 6){
             t[idx].start();
             bottom2_L.setVisible(true);
-            if(key4Open) { t[idx].stop();  }
+            if(key4Open) { playerDamage();  }
+            else if(!key4Open){ stopPlayerDamage(); }
         }
         if(timerCounter == 7){
             t[idx].start();
             bottom1_L.setVisible(true);
             mid3_L.setVisible(true);
-            if(key3Open || key4Open) { t[idx].stop(); timeCounter[idx] = 0; }
+            if(!key3Open || !key4Open) { t[idx].stop(); timeCounter[idx] = 0; }
         }
     }
     //</editor-fold>
@@ -474,12 +482,10 @@ public class Scene2 extends Scene implements GetDetectName{
         if(!key3.isEnabled()) return;
         if(mid3_L.isVisible()){ 
             if(key3cnt%2==1){
-                enemyDetect.setVisible(true);
-                GameManager.goblinDamaged();
+                enemyDamage();
             }
             else{
-                enemyDetect.setVisible(false);
-                GameManager.stopGoblinDamage();
+                stopEnemyDamage();
             }
         }
     }//GEN-LAST:event_key3ActionPerformed
@@ -499,17 +505,32 @@ public class Scene2 extends Scene implements GetDetectName{
         if(!key4.isEnabled()) return;
         if(mid3_R.isVisible()){ 
             if(key4cnt%2==1){
-                playerDetect.setVisible(true);
-                GameManager.playerDamaged();
+                playerDamage();
             }
             else{
-                playerDetect.setVisible(false);
-                GameManager.stopHeroDamaged();
+                stopPlayerDamage();
             }
         }
         
     }//GEN-LAST:event_key4ActionPerformed
 //</editor-fold>
+    
+    private void enemyDamage(){
+        enemyDetect.setVisible(true);
+        GameManager.goblinDamaged();
+    }
+    private void playerDamage(){
+        playerDetect.setVisible(true);
+        GameManager.playerDamaged();
+    }
+    private void stopEnemyDamage(){
+        enemyDetect.setVisible(false);
+        GameManager.stopGoblinDamage();
+    }
+    private void stopPlayerDamage(){
+        playerDetect.setVisible(false);
+        GameManager.stopHeroDamaged();
+    }
     
     private int recheckTimerIdx(){
         if (idx == timeCounter.length-1) idx = 0;

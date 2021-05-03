@@ -73,11 +73,11 @@ public class GameManager {
         //need to end this game;
         pauseGame();
         if("Hero".equals(name)){
-            System.out.println("Goblin Win");
+            //System.out.println("Goblin Win");
             MainFrame.endLoseScene();
         }
         else if ("Goblin".equals(name)){
-            System.out.println("Player Win"+calculateScore());
+            //System.out.println("Player Win"+calculateScore());
             if("1 Star".equals(calculateScore()))  result = "1 Star";
             else if("2 Stars".equals(calculateScore())) result = "2 Stars";
             else if("3 Stars".equals(calculateScore())) result = "3 Stars";

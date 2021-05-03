@@ -373,7 +373,7 @@ public class Scene1 extends Scene implements GetDetectName{
         for(int i =0;i<t.length;i++){
             if(t[i]!=null){
                 t[i].stop();
-                System.out.println("stop timer");
+                //System.out.println("stop timer");
             }
         }
     }

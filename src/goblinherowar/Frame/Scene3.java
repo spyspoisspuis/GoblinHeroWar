@@ -326,28 +326,28 @@ public class Scene3 extends Scene implements GetDetectName{
     }//GEN-LAST:event_key1ActionPerformed
 
     private void key1OpenPerformed(int timerCounter){
-        if(timerCounter == 0 && top4.isVisible()) {
+        if(timerCounter == 0) {
             t[idx].start();
             top1.setVisible(false);
             mid_M.setVisible(true);
         }
-        if(timerCounter == 1 && mid_M.isVisible()){
+        if(timerCounter == 1){
             t[idx].start();
             top2.setVisible(false);
             mid1_L.setVisible(true);
-            if(key2Open) { t[idx].stop(); }
+            if(key2Open) { key2OpenPerformed(timerCounter); }
         }
-        if (timerCounter == 2 && mid_M.isVisible()){
+        if (timerCounter == 2){
             t[idx].start();
             top3.setVisible(false);
             mid2_L.setVisible(true);
-            if(key2Open) { t[idx].stop(); }
+            if(key2Open) { key2OpenPerformed(timerCounter); }
         }
-        if(timerCounter == 3 && mid_M.isVisible()){
+        if(timerCounter == 3){
             t[idx].start();
             top4.setVisible(false);
             mid3_L.setVisible(true);
-            if(key3Open) { t[idx].stop(); timeCounter[idx] = 0; }
+            if(!key3Open) { t[idx].stop(); timeCounter[idx] = 0; }
         }
     }
     //</editor-fold>
@@ -404,7 +404,7 @@ public class Scene3 extends Scene implements GetDetectName{
             t[idx].start();
             top4.setVisible(false);
             mid3_R.setVisible(true);
-            if(key4Open) { t[idx].stop(); timeCounter[idx] = 0; }
+            if(!key4Open && mid3_R.isVisible()) { t[idx].stop(); timeCounter[idx] = 0; }
         }
     }
     //</editor-fold>
