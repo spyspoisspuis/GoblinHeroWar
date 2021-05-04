@@ -85,6 +85,8 @@ public class Scene3 extends Scene implements GetDetectName{
         key2.setEnabled(true);
         key3.setEnabled(true);
         key4.setEnabled(true);
+        setting.setEnabled(true);
+        setting.setVisible(true);
         key1.setVisible(true);
         key2.setVisible(true);
         key3.setVisible(true);

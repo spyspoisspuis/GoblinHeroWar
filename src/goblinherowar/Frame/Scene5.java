@@ -80,14 +80,8 @@ public class Scene5 extends Scene implements GetDetectName{
         key4.setVisible(true);
         key5.setVisible(true);
         key6.setVisible(true);
-        /*
-        key1.setLocation(,);
-        key2.setLocation(,);
-        key3.setLocation(,);
-        key4.setLocation(,);
-        key5.setLocation(,);
-        key6.setLocation(,);
-        */
+        setting.setEnabled(true);
+        setting.setVisible(true);
         top1_L.setVisible(true);
         top2_L.setVisible(true);
         top3_L.setVisible(true);

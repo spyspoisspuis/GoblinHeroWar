@@ -80,6 +80,16 @@ public class MainFrame extends javax.swing.JFrame{
         scene.get(SceneManager.currentIdx).closeAllTimer();
         if(scene.get(10).isDisplayable()) setSceneVisible(10,false);
     }
+    public static void midResetScene(int i){
+        scene.get(SceneManager.currentIdx).resetScene();
+        scene.get(SceneManager.currentIdx).closeAllTimer();
+        if(scene.get(SceneManager.currentIdx) instanceof Scene8)
+        {
+            Scene8 s = (Scene8) scene.get(SceneManager.currentIdx);
+            s.timerCountDown();
+        }
+        if(scene.get(10).isDisplayable()) setSceneVisible(10,false);
+    }
     
     public static void endWinScene(){
         if(scene.get(SceneManager.currentIdx) instanceof Scene8) {

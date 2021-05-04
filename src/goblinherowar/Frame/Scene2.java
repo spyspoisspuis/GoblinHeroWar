@@ -93,7 +93,8 @@ public class Scene2 extends Scene implements GetDetectName{
         Util.moveButton(key2,k2.getX(),k2.getY());
         Util.moveButton(key3,k3.getX(),k3.getY());
         Util.moveButton(key4,k4.getX(),k4.getY());
-        
+        setting.setEnabled(true);
+        setting.setVisible(true);
         top1.setVisible(true);
         top2.setVisible(true);
         top3.setVisible(true);

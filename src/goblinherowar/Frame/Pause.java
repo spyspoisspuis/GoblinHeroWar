@@ -108,6 +108,8 @@ public class Pause extends Scene {
         MainFrame.setKeyButtonEnabled(true);
 
         MainFrame.setSceneVisible(9,false);
+        if(SceneManager.currentIdx == 8)
+            MainFrame.midResetScene(8);
         MainFrame.midResetScene();
     }//GEN-LAST:event_retryActionPerformed
 
